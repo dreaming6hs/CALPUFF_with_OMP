@@ -2,11 +2,11 @@
 **Developing CALPUFF(v7.2) with OMP so that it can run parallel.**
 
 # Brief description
-Base on CALPUFF v7.2, codes were transformed from fixed format(.for) to free format(.f90).
+Base on **_CALPUFF v7.2_**, codes were transformed from fixed format(.for) to free format(.f90).
 
-Parallel calculating tasks are held among PUFF(s), thus PARALLEL region was created at *puff loop* in *subroutine comp* in the file `calpuff.f90`.
+Parallel calculating tasks are held among PUFF(s), thus PARALLEL region was created at *puff loop* in `subroutine comp` in the file `calpuff.f90`.
 
-Declarations of variables involved in the functions or subroutines invoked in the PARALLEL region, and those in *subroutine comp* were added, so that some OMP attributes, eg. THREADPRIVATE, FISRTPRIVATE, etc., can be defined.
+Declarations of variables involved in the functions or subroutines invoked in the PARALLEL region, and those in `subroutine comp` were added, so that some OMP attributes, eg. THREADPRIVATE, FISRTPRIVATE, etc., can be defined.
 
 All modifications by me were marked with *wangzhm* in the code files.
 
