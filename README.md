@@ -17,3 +17,4 @@ For more details, please contact me via E-mail: *dreaming@ixy.info*
 
 **Welcome aboard** CALPUFFers!
 
+This repository use the *Apache License 2.0*.
