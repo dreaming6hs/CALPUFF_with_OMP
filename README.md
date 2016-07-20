@@ -19,4 +19,4 @@ For more details, please contact me via E-mail: *dreaming@ixy.info*
 
 
 # License
-This repository uses the *Apache License 2.0*.
+This repository uses the [*The MIT License*](http://choosealicense.com/licenses/mit/).
