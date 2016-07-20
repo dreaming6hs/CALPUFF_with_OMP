@@ -1,0 +1,30 @@
+!-----------------------------------------------------------------------        
+! --- COMMON BLOCK /FLVAR/ --- FLOPUFF Variables                 CALPUFF        
+!-----------------------------------------------------------------------        
+                                                                                
+      REAL*4 LX,LY,LXI,LYI,LXI2,LYI2,LYI3,LZ,LZI,LN,LNI                         
+      COMMON/FLVAR/     LX,LY,LXI, LXI2, LYI, LYI2, LYI3, LZI,                 &
+     &                  LZ, LN, LNI, HASYM, BVUI, BVUI2, S, S2, B0N2,          &
+     &                  B0, B02, FR,                                           &
+     &                  GAM, HH                                                 
+!-----------------------------------------------------------------------        
+!     DEFINITIONS       [i]=integer     [r]=real        [a]=array               
+!-----------------------------------------------------------------------        
+! LX (m)            LENGTH SCALE OF HILL IN THE X-DIRECTION          [r]        
+! LY (m)            LENGTH SCALE OF HILL IN THE Y-DIRECTION          [r]        
+! LXI,LXI2          1/LX AND 1/LX**2                                 [r]        
+!       (m^-1[2])                                                               
+! LYI,LYI(2,3)      1/LY, 1/LY**2, 1/LY**3                           [r]        
+!     (m^-1[2,3])                                                               
+! LZ,LZI (m),(1/m)  VERTICAL LENGTH SCALE AND ITS INVERSE            [r]        
+! LN,LNI (m),(1/m)  ABOVE, SCALED .5*SQRT(PI)                        [r]        
+! HASYM             HILL ASYMMETRY FACTOR                            [r]        
+! BVUI,BVUI2        BRUNT-VAISALA FREQ/U, AND ITS SQUARE             [r]        
+!       (m^-1[2])                                                               
+! S,S2              STRATIFICATION FACTOR, AND ITS SQUARE            [r]        
+! B0N2              SQUARE OF NEUTRAL VALUE OF PARAMETER B0          [r]        
+! B0,B02            STRATIFIED VALUE OF PARAMETER B0, AND ITS SQUARE [r]        
+! FR                FROUDE NUMBER FOR CUT-OFF HILL                   [r]        
+! GAM (m^-2)        ROTATION TERM                                    [r]        
+! HH (m)            HEIGHT OF HILL AT THE CREST (THE CUT-OFF HILL)   [r]        
+!-----------------------------------------------------------------------        

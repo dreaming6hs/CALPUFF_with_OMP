@@ -1,0 +1,31 @@
+!----------------------------------------------------------------------         
+!                                                                               
+! Data used in new SOA module                                   CALPUFF         
+!                                                                               
+!----------------------------------------------------------------------         
+!                                                                               
+      integer NORG                                                              
+      parameter (NORG = 7)                                                      
+!                                                                               
+      real MW_ORG(NORG), HVAP(NORG), KOM(NORG)                                  
+!                                                                               
+!     Variables:                                                                
+!            NORG - integer - Number of condensable species                     
+!          MW_ORG - real    - Mol. wt. of condensable species                   
+!             KOM - real    - Partition coefficients (m3/ug)                    
+!            HVAP - real    - Heat of vaporization (KJ/Mol)                     
+!                                                                               
+      DATA KOM / 0.1586, 0.0057,     &!TOL                                      
+     &           0.1257, 0.0042,     &!XYL                                      
+     &           0.0229,             &!ALKH                                     
+     &           0.0150,0.0020 /      !PAH                                       
+!                                                                               
+      DATA HVAP / 72.67  , 72.67,    &!TOL                                        
+     &            72.67  , 72.67,    &!XYL                                        
+     &            72.67  ,           &!ALKH                                       
+     &            72.67  , 72.67 /    !PAH                                        
+      DATA MW_ORG / 2 * 92.0, 2 * 106.0, 226.0, 2 * 156.0 /                     
+!                                                                               
+! Gas constant in KJ/mol-K                                                      
+      REAL RKJMOLK                                                              
+      PARAMETER (RKJMOLK = 8.31451E-3)                                          

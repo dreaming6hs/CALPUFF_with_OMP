@@ -1,0 +1,42 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AUXDAT/ -- Current data from the           CALPUFF          
+!                              auxiliary meteorological data                    
+!                              file(s)                                          
+!----------------------------------------------------------------------         
+                                                                                
+      real qcup(mxnx,mxny,mxmetdom)                                             
+      real zuptop(mxnx,mxny,mxmetdom),zupbot(mxnx,mxny,mxmetdom)                
+      real qc3d(mxnx,mxny,mxnz,mxmetdom)                                        
+      integer icldmr2d(3,mxmetdom),icldmr3d(mxmetdom)                           
+                                                                                
+      common/AUXDAT/icldmr2d,icldmr3d,qcup,zuptop,zupbot,qc3d                   
+                                                                                
+! --- COMMON BLOCK /AUXDAT/ Variables:                                          
+!   ICLDMR2D(3,mxmetdom) - integer - Position of cloud water variables          
+!                                    in list of 2D variables in                 
+!                                    auxiliary CALMET files                     
+!                                    (1,_): CLDMRUP                             
+!                                    (2,_): ZCLDBOT                             
+!                                    (3,_): ZCLDTOP                             
+!     ICLDMR3D(mxmetdom) - integer - Position of cloud water variable           
+!                                    in list of 3D variables in                 
+!                                    auxiliary CALMET files                     
+!                                    (_): CLDMR3D                               
+!        QCUP(mxnx,mxny,mxmetdom)                                               
+!                        - real    - CLDMRUP:  Liquid cloud water               
+!                                    mixing ratio averaged over all             
+!                                    cloud layers above CALMET domain           
+!                                    top (g/kg)                                 
+!      ZUPBOT(mxnx,mxny,mxmetdom)                                               
+!                        - real    - ZCLDBOT:  Bottom of liquid cloud           
+!                                    water layers above CALMET domain           
+!                                    top (mAGL)                                 
+!                                    (Zero if no water)                         
+!      ZUPTOP(mxnx,mxny,mxmetdom)                                               
+!                        - real    - ZCLDTOP:  Top of liquid cloud              
+!                                    water layers above CALMET domain           
+!                                    top (mAGL)                                 
+!                                    (Zero if no water)                         
+!   QC3D(mxnx,mxny,mxnz,mxmetdom)                                               
+!                        - real    - CLDMR3D:  Liquid cloud water               
+!                                    mixing ratio for 3D CALMET grid            

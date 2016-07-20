@@ -1,0 +1,27 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /PDF/ -- PDF dispersion variables            CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      logical lpdf                                                              
+      common/pdf/lpdf,swupf,swdnf,szupb,szdnb,wup,wdn,zup,zdn,                 &
+     &           wtup,wtdn,risq,ryz,dhfac,rfacsq                                
+!                                                                               
+! --- COMMON BLOCK /PDF/ Variables:                                             
+!          LPDF - logical - PDF computation active when .TRUE.                  
+!         SWUPF - real    - Updraft (sigma-w / full sigma-w)**2                 
+!         SWDNF - real    - Downdraft (sigma-w / full sigma-w)**2               
+!         SZUPB - real    - Updraft BID**2 term (m2)                            
+!         SZDNB - real    - Downdraft BID**2 term (m2)                          
+!           WUP - real    - Updraft w (indirect path)(m/s)                      
+!           WDN - real    - Downdraft w (direct path)(m/s)                      
+!           ZUP - real    - Updraft puff ht (m)                                 
+!           ZDN - real    - Downdraft puff ht (m)                               
+!          WTUP - real    - Updraft path weight (indirect path)                 
+!          WTDN - real    - Downdraft path weight (direct path)                 
+!          RISQ - real    - Initial plume radius (squared) at CBL               
+!                           top (m^2)                                           
+!           RYZ - real    - Growth rate of elliptical plume                     
+!                           crossection (m**2/s**2)                             
+!         DHFAC - real    - Effective rise factor, where effective              
+!                           rise given by t*dhfac/SQRT(risq+ryz*t^2)            
+!        RFACSQ - real    - Gradual rise adj to BID**2                          

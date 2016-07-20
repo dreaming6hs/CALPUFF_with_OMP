@@ -1,0 +1,49 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /COASTLN/ -- User-Supplied Coast Line Data   CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      logical*1 lcoast                                                          
+      integer*1 lwmdom                                                          
+      integer ncoast,npcoast,lwcell                                             
+      real coastgrd,ymxpb                                                       
+                                                                                
+      common/COASTLN/ncoast,npcoast(2,mxcoast),coastgrd(2,mxptcst),            &
+     &               ymxpb(2,mxptcst),lwcell(2,mxptcst),                       &
+     &               lwmdom(2,mxptcst),lcoast(mxnx,mxny,mxmetdom)               
+!                                                                               
+! --- COMMON BLOCK /COASTLN/ Variables:                                         
+!                                                                               
+!               NCOAST - integer - Number of coasts defined                     
+!   NPCOAST(2,mxcoast) - integer - Pointer to locations in COASTGRD             
+!                                  array containing data for each coast         
+!                                  where element 1 is the start and             
+!                                  element 2 is the end                         
+!  COASTGRD(2,mxptcst) - real    - x,y coordinates (MET GRID UNITS) of          
+!                                  points along each coast line, where          
+!                                  element 1 is x, element 2 is y               
+!     YMXPB(2,mxptcst) - real    - slope 'm' and intercept 'b' for line         
+!                                  defined by each coastline segment            
+!                                  element 1 is 'm', element 2 is 'b'           
+!    LWCELL(2,mxptcst) - integer - Cell index for nearest land cell and         
+!                                  and water cell to each point in              
+!                                  coast line, where element 1 is LAND,         
+!                                  and element 2 is WATER                       
+!    LWMDOM(2,mxptcst) - integer - MET grid domain for the cells                
+!                                  referenced in LWCELL, where element          
+!                                  1 is LAND, and element 2 is WATER            
+!    LCOAST(mxnx,mxny,mxmetdom)                                                 
+!                      - logical - Logical marker indicating if a MET           
+!                                  GRID cell contains a coastline               
+!----------------------------------------------------------------------         
+! NOTE:1.More than 1 coast can be defined, but all are appended in the          
+!        COASTGRD array.  The NPCOAST provides the index for the start          
+!        and the end of each coast line.  Also, the ordering of the             
+!        points follows the convention that the water is to the RIGHT           
+!        of the line traced out by these points.                                
+!      2.Cell index pointer LWCELL assumes that the nx*ny possible              
+!        locations correspond to 1D list in which ny rows of nx values          
+!        each are appended, where the first nx values are for iy=1.             
+!        The nx*ny depend on the met grid as indicated by the                   
+!        corresponding entry in LWMDOM (e.g., if LWMDOM(1,423)=3 and            
+!        LWCELL(1,423)= 1309 the 1309 is computed for the grid that is          
+!        nxm(3) by nym(3).                                                      

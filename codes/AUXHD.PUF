@@ -1,0 +1,108 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AUXHD/ -- Header from the auxiliary        CALPUFF          
+!                             meteorological data file(s)                       
+!----------------------------------------------------------------------         
+      character*4 utmhemma                                                      
+      character*8 datumma,pmapma,axbtzma                                        
+      character*12 datenma                                                      
+                                                                                
+      integer naux2d(mxmetdom),naux3d(mxmetdom)                                 
+      character*8 auxnam2d(mxaux,mxmetdom), auxnam3d(mxaux,mxmetdom)            
+      character*8 auxunit2d(mxaux,mxmetdom), auxunit3d(mxaux,mxmetdom)          
+      character*4 auxtyp2d(mxaux,mxmetdom), auxtyp3d(mxaux,mxmetdom)            
+                                                                                
+      common/AUXHD/nxma(mxmetdom),nyma(mxmetdom),nzma,                         &
+     &             xgridma(mxmetdom),xorigma(mxmetdom),                        &
+     &             yorigma(mxmetdom),axbtzma,xbtzma,                           &
+     &             rnlat0ma,relon0ma,xlat1ma,xlat2ma,                          &
+     &             zfacema(mxnzp1),itimesa,                                    &
+     &             ibymeta(mxmetdom),ibmmeta(mxmetdom),                        &
+     &             ibdmeta(mxmetdom),ibjdmeta(mxmetdom),                       &
+     &             ibhmeta(mxmetdom),ibsmeta(mxmetdom),                        &
+     &             ieymeta(mxmetdom),iemmeta(mxmetdom),                        &
+     &             iedmeta(mxmetdom),iejdmeta(mxmetdom),                       &
+     &             iehmeta(mxmetdom),iesmeta(mxmetdom),                        &
+     &             iutmznma,feastma,fnorthma,pmapma,                           &
+     &             datumma,datenma,utmhemma,                                   &
+     &             naux2d,naux3d,auxnam2d,auxnam3d,                            &
+     &             auxunit2d,auxunit3d,auxtyp2d,auxtyp3d                        
+!                                                                               
+! --- COMMON BLOCK /AUXHD/ Variables:                                           
+!----------------------------------------------------------------------         
+! --- Header (Trailing A denotes Auxilliary file)                               
+!----------------------------------------------------------------------         
+!    NXMA(mxmetdom) - integer - Number of CALMET grid points in                 
+!                               X direction                                     
+!    NYMA(mxmetdom) - integer - Number of CALMET grid points in                 
+!                               Y direction                                     
+!              NZMA - integer - Number of CALMET vertical levels                
+! XGRIDMA(mxmetdom) - real    - CALMET grid spacing (m)                         
+! XORIGMA(mxmetdom) - real    - Reference X coordinate (m) of                   
+!                               southwest corner of CALMET grid                 
+! YORIGMA(mxmetdom) - real    - Reference Y coordinate (m) of                   
+!                               southwest corner of CALMET grid                 
+!            XBTZMA - real    - Base time zone of CALMET data                   
+! RNLAT0MA,         - real    - N. Latitude, E. Longitude of (0,0)              
+! RELON0MA (deg)                of map projection (Used only if                 
+!                               PMAP =LCC, PS, EM, TTM or LAZA)                 
+! XLAT1MA,          - real    - Matching N. Latitude(s) for map                 
+! XLAT2MA (deg)                (Used only if PMAP= LCC, PS, or EM)              
+!                             LCC :Projection cone slices through               
+!                                  Earth's surface at XLAT1 and XLAT2           
+!                             PS  :Projection plane slices through              
+!                                  Earth at XLAT1                               
+!                             EM  :Projection cylinder slices through           
+!                                  Earth at [+/-] XLAT1                         
+!   ZFACEMA(mxnzp1) - real    - CALMET cell face heights (m)                    
+!                               (NZM+1 values)                                  
+!           ITIMESA - integer - Flag for reading times                          
+!                                0: end-time (no seconds)                       
+!                                1: begin-time / end-time with seconds          
+!  IBYMETA(mxmetdom)- integer - Beginning year of run (four digits)             
+!  IBMMETA(mxmetdom)- integer - Beginning month of run                          
+!  IBDMETA(mxmetdom)- integer - Beginning day of run                            
+! IBJDMETA(mxmetdom)- integer - Beginning Julian day of run                     
+!  IBHMETA(mxmetdom)- integer - Beginning hour of run (00-23)                   
+!  IBSMETA(mxmetdom)- integer - Beginning seconds of run (0000-3599)            
+!  IEYMETA(mxmetdom)- integer - Ending year of run (four digits)                
+!  IEMMETA(mxmetdom)- integer - Ending month of run                             
+!  IEDMETA(mxmetdom)- integer - Ending day of run                               
+! IEJDMETA(mxmetdom)- integer - Ending Julian day of run                        
+!  IEHMETA(mxmetdom)- integer - Ending hour of run (00-23)                      
+!  IESMETA(mxmetdom)- integer - Ending seconds of run (0000-3599)               
+! IUTMZNMA          - integer - UTM zone for UTM projection                     
+! FEASTMA (km)      - real    - False Easting at projection origin              
+! FNORTHMA(km)      - real    - False Northing at projection origin             
+! PMAPMA            - char*8  - Code for output map projection                  
+!                             UTM :Universal Transverse Mercator                
+!                             LCC :Lambert Conformal Conic                      
+!                             PS  :Polar Stereographic                          
+!                             EM  :Equatorial Mercator                          
+!                             LAZA:Lambert Azimuthal Equal Area                 
+!                             TTM :Tangential Transverse Mercator               
+! UTMHEMMA          - char*4  - Base hemisphere for UTM projection              
+!                              (S=southern, N=northern)                         
+! DATUMMA           - char*8  - Datum-Region for grid coordinates               
+! DATENMA           - char*12 - NIMA date for datum parameters                  
+!                               (MM-DD-YYYY  )                                  
+! NAUX2D(mxmetdom)- integer    - Number of 2D variables                         
+! NAUX3D(mxmetdom)- integer    - Number of 3D variables                         
+! AUXNAM2D(mxaux  - C*8 array  - 2D variable names in AUX output                
+!      ,mxmetdom)                                                               
+! AUXNAM3D(mxaux  - C*8 array  - 3D variable names in AUX output                
+!      ,mxmetdom)                                                               
+! AUXUNIT2D(mxaux - C*8 array  - 2D variable units in AUX output                
+!      ,mxmetdom)                                                               
+! AUXUNIT3D(mxaux - C*8 array  - 3D variable units in AUX output                
+!      ,mxmetdom)                                                               
+! AUXTYP2D(mxaux  - C*4 array  - 2D variable types in AUX output                
+!      ,mxmetdom)                                                               
+! AUXTYP3D(mxaux  - C*4 array  - 3D variable types in AUX output                
+!      ,mxmetdom)                                                               
+!----------------------------------------------------------------------         
+! --- Notes: 1. AUX Variable names are upper case                               
+!            2. AUX Variable units are upper case                               
+!               'G/M3    ' for example                                          
+!            3. AUX Variable types allowed are                                  
+!               'R_4 ' for single-precision reals                               
+!               'I_4 ' for 4-byte integers                                      

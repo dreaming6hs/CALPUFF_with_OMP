@@ -1,0 +1,15 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /SOA/ -- Data used in SOA module             CALPUFF         
+!                                                                               
+!----------------------------------------------------------------------         
+!                                                                               
+      logical larom,lbiog                                                       
+      common/SOA/LBIOG,LAROM,AMO,VC2NX                                          
+!                                                                               
+! --- COMMON BLOCK /SOA/ Variables:                                             
+!                                                                               
+!           LBIOG - logical - Biogenic species emitted/modeled ?                
+!           LAROM - logical - Aromatic species emitted/modeled ?                
+!             AMO - real    - Organic mass of fine particulates (ug/m3)         
+!           VC2NX - real    - VOC / NOX ratio (after reaction)                  
+!                                                                               

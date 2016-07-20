@@ -1,0 +1,38 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /GRIDNEST/ -- Derived information from       CALPUFF         
+!                                nested meteorological data                     
+!                                files                                          
+!-----------------------------------------------------------------------        
+                                                                                
+      integer*1 metcell(mxnx,mxny,mxmetdom)                                     
+      integer ngrid                                                             
+      integer nestfac(mxmetdom),nestfacmx,ipargrd(mxmetdom)                     
+      real rnxnest0(mxmetdom),rnynest0(mxmetdom)                                
+                                                                                
+      real cgridll(2,mxmetdom),cgridur(2,mxmetdom)                              
+                                                                                
+      common/GRIDNEST/ ngrid,nestfac,nestfacmx,ipargrd,                        &
+     &                 rnxnest0,rnynest0,cgridll,cgridur,metcell                
+                                                                                
+! --- COMMON BLOCK /GRIDNEST/ Variables:                                        
+!             NGRID - integer - Number of CALMET met file grids                 
+! NESTFAC(mxmetdom) - integer - Number of cells in each grid that               
+!                               equals one cell in outermost grid.              
+!                               This is applied in 1-D.                         
+!         NESTFACMX - integer - Maximum nest factor NESTFAC                     
+! IPARGRD(mxmetdom) - integer - Parent grid ID for each nested grid             
+! RNXNEST0(mxmetdom) - real   - Number of grid-k cells from origin of           
+!                               grid-1 to origin of grid-k in X                 
+! RNYNEST0(mxmetdom) - real   - Number of grid-k cells from origin of           
+!                               grid-1 to origin of grid-k in Y                 
+! CGRIDLL(2,mxmetdom) - real  - Lower-Left corner Coordinates of each           
+!                               MET grid domain in outermost grid units         
+!                               (1,_): x coordinate, (2,_): y coordinate        
+! CGRIDUR(2,mxmetdom) - real  - Upper-Right corner Coordinates of each          
+!                               MET grid domain in outermost grid units         
+!                               (1,_): x coordinate, (2,_): y coordinate        
+! METCELL(mxnx,mxny,mxmetdom)                                                   
+!                   -integer*1- Validity flag for each (i,j) grid               
+!                               point in each of the met grid domains           
+!                               METCELL=0 data in grid cell not used            
+!                               METCELL=1 data in grid cell used                

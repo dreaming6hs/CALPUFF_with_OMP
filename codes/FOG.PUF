@@ -1,0 +1,49 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /FOG/ -- FOG option data                     CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      parameter (mxpt=mxpt1+mxpt2)                                              
+      real xrfog(mxrfog)                                                        
+      real zrfog(mxrfog,mxpt)                                                   
+      integer ipcp(51), ifdays(366), ipfog(mxpt)                                
+      character*20 ftitle(4)                                                    
+      logical lpmode,ladtfog                                                    
+!                                                                               
+      common/FOG/ftitle,nfrec,nfpts,ipcp,ifyr,ifdays,nipfog,ipfog,             &
+     &           xrfog,zrfog,issta,ixsrc,iysrc,mdsrc,txsmxfog,                 &
+     &           lpmode,ladtfog                                                 
+!                                                                               
+! --- COMMON BLOCK /FOG/ Variables:                                             
+! --------------------------------------------------------------------          
+! --- Output file header variables                                              
+! --------------------------------                                              
+!      FTITLE - character*4  - Title line for FOG output file                   
+!       NFREC - integer      - Number of discrete receptors (ndrec)             
+!       NFPTS - integer      - Number of point sources                          
+!        IPCP - integer      - Array of 51*0 (not used in Fog Model)            
+!        IFYR - integer      - Year of simulation (assumes only 1 year)         
+!      IFDAYS - integer      - Days to process in year                          
+!                                0:  Do Not Process Day                         
+!                                1:  Process Day                                
+!                             (All days set to 0 to signal CALPUFF run)         
+!      LPMODE - logical      - Plume-mode indicator (T/F)                       
+! --------------------------------------------------------------------          
+! --- Computational variables (Plume Mode)                                      
+! ----------------------------------------                                      
+!      NIPFOG - integer      - Number of active fog sources this hour           
+!       IPFOG - integer      - Puff index for first puff released               
+!                              from each active source this hour                
+!       XRFOG - real         - Receptor distances from source (m)               
+!                              for output -- MXRFOG values                      
+!       ZRFOG - real         - Receptor height (m AGL) at the XRFOG             
+!                              distances for each each source                   
+! --------------------------------------------------------------------          
+! --- Computational variables                                                   
+! ----------------------------                                                  
+!       ISSTA - integer      - Surface met station nearest source               
+! IXSRC,IYSRC - integer      - Met grid cell nearest sources                    
+!       MDSRC - integer      - MET grid domain index for [IX,IY]SRC             
+!    TXSMXFOG - real         - Maximum temperature excess (K) allowed           
+!                              when summing contributions at receptor           
+!     LADTFOG - logical      - Use summmed temperature excess at                
+!                              receptor, from all puffs (T/F)                   

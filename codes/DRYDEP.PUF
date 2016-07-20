@@ -1,0 +1,27 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /DRYDEP/ -- Dry deposition flags             CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/DRYDEP/idryflg(mxspec),vduser(24,mxspec),nvduser,                 &
+     & zref,iveg                                                                
+!                                                                               
+! --- COMMON BLOCK /DRYDEP/ Variable:                                           
+!                                                                               
+!     IDRYFLG(mxspec) - integer  - Array of dry deposition flags for            
+!                                  each pollutant                               
+!                                    0 = No deposition                          
+!                                    1 = Resistance model - gas                 
+!                                    2 = Resistance model - particle            
+!                                    3 = User-specified dep. velocities         
+!   VDUSER(24,mxspec) - real     - Deposition velocity (m/s) for each           
+!                                  hour of the day and species                  
+!                                  (missing values indicated by -999.)          
+!             NVDUSER - integer  - Number of species for which the              
+!                                  user-specified deposition velocities         
+!                                  are used                                     
+!                ZREF - real     - Reference height (m) for computing           
+!                                  the atmospheric resistance                   
+!                IVEG - integer  - Vegetation index in unirrigated areas        
+!                                   1=vegetation is active & unstressed         
+!                                   2=vegetation is active & stressed           
+!                                   3=vegetation is inactive                    

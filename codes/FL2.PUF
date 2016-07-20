@@ -1,0 +1,160 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /FL2/ -- Flare source data for sources      CALPUFF          
+!                           with variable characteristics                       
+!                           in FLEMARB.DAT files                                
+!----------------------------------------------------------------------         
+!                                                                               
+      character*12 cslst6                                                       
+      character*16 cid6                                                         
+                                                                                
+      logical*4 lutmfl2,llccfl2,lpsfl2,lemfl2,llazafl2,lttmfl2                  
+      character*4 utmhemfl2,xyunitfl2                                           
+      character*8 datumfl2,pmapfl2                                              
+      character*12 datenfl2                                                     
+                                                                                
+      common/FL2/ NFL2,NSE6,MFFL2(mxemdat),                                    &
+     &     IBSRC6(mxemdat),IESRC6(mxemdat),                                    &
+     &     IBDATHR6(mxemdat),IBSEC6(mxemdat),IEDATHR6(mxemdat),                &
+     &     IESEC6(mxemdat),XTZ6(mxemdat),T2BTZ6(mxemdat),                      &
+     &     XMWEM6(mxspec),IXREM6(mxspec),TIEM6(8,mxfl2),                       &
+     &     lutmfl2(mxemdat),llccfl2(mxemdat),lpsfl2(mxemdat),                  &
+     &     lemfl2(mxemdat),llazafl2(mxemdat),lttmfl2(mxemdat),                 &
+     &     iutmznfl2(mxemdat),feastfl2(mxemdat),fnorthfl2(mxemdat),            &
+     &     rnlat0fl2(mxemdat),relon0fl2(mxemdat),                              &
+     &     rnlat1fl2(mxemdat),rnlat2fl2(mxemdat),NSTEP6(mxemdat),              &
+     &     NDHRQB6(mxqstep,mxemdat),NSECQB6(mxqstep,mxemdat),                  &
+     &     NDHRQE6(mxqstep,mxemdat),NSECQE6(mxqstep,mxemdat),                  &
+     &     XFL2GRD(mxqstep,mxfl2),YFL2GRD(mxqstep,mxfl2),                      &
+     &     HTFL2(mxqstep,mxfl2),ELFL2(mxqstep,mxfl2),                          &
+     &     DFL2(mxqstep,mxfl2),TFL2(mxqstep,mxfl2),                            &
+     &     UFL2(mxqstep,mxfl2),VFL2(mxqstep,mxfl2),                            &
+     &     WFL2(mxqstep,mxfl2),                                                &
+     &     SY0FL2(mxqstep,mxfl2),SZ0FL2(mxqstep,mxfl2),                        &
+     &     QFL2(mxspec,mxqstep,mxfl2),NEWFL2(mxfl2),                           &
+     &     CSLST6(mxspec),CID6(mxfl2),                                         &
+     &     pmapfl2(mxemdat),utmhemfl2(mxemdat),datumfl2(mxemdat),              &
+     &     datenfl2(mxemdat),xyunitfl2(mxemdat)                                 
+                                                                                
+                                                                                
+!                                                                               
+! --- COMMON BLOCK /FL2/ Variables:                                             
+!             NFL2 - integer  - Number of flare sources                         
+!             NSE6 - integer  - Number of emitted species in the file           
+!  MFFL2(mxemdat) - integer   - Flag for file type                              
+!                                 0: UNFORMATTED (not supported!)               
+!                                 1: FORMATTED                                  
+!  IBSRC6(mxemdat) - integer  - Index for first source in a FLEMARB.DAT         
+!                               file                                            
+!  IESRC6(mxemdat) - integer  - Index for last source in a FLEMARB.DAT          
+!                               file                                            
+! IBDATHR6(mxemdat)- integer  - Date/hour at beginning of period for            
+!                               the first data record in the file               
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IBSEC6(mxemdat) - integer  - Seconds of the first data record in the         
+!                               file  (0000-3599)                               
+! IEDATHR6(mxemdat)- integer  - Date/hour at end of period for                  
+!                               the last data record in the file                
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IESEC6(mxemdat) - integer  - Seconds of the last data record in the          
+!                               file  (0000-3599)                               
+!    XTZ6(mxemdat) - real     - Time zone (UTC=LST+XTZ6)                        
+!  T2BTZ6(mxemdat) - real     - Hours to ADD to Local Time to obtain            
+!                               Base Time (xtz3-xbtz)                           
+!   XMWEM6(mxspec) - real     - Molecular weight for each species               
+!   IXREM6(mxspec) - integer  - Cross referencing array of NSE6                 
+!                               values relating species ordering                
+!                               in the emissions file to the                    
+!                               ordering in the main conc. array                
+!   TIEM6(8,mxfl2) - real     - Time-invariant data for arbitrarily-            
+!                               varying flare source emissions                  
+!                               (1,-) = Flag for flux type                      
+!                                       1: T, U, V, W                           
+!                                       2: Fb, Fmx, Fmy, Fmz                    
+!                               (2,-) = Not currently used                      
+!                               (3,-) = Not currently used                      
+!                               (4,-) = Not currently used                      
+!                               (5,-) = Not currently used                      
+!                               (6,-) = Not currently used                      
+!                               (7,-) = Not currently used                      
+!                               (8,-) = Not currently used                      
+!                                                                               
+! --- MAP Projection Variables ---                                              
+!                                                                               
+! LUTMFL2(mxemdat)  -logical*4- Flag for Universal Transverse Mercator          
+! LLCCFL2(mxemdat)  -logical*4- Flag for Lambert Conformal Conic                
+! LPSFL2(mxemdat)   -logical*4- Flag for Polar Stereographic                    
+! LEMFL2(mxemdat)   -logical*4- Flag for Equatorial Mercator                    
+! LLAZAFL2(mxemdat) -logical*4- Flag for Lambert Azimuthal Equal Area           
+! LTTMFL2(mxemdat)  -logical*4- Flag for Tangential Transverse Mercator         
+!                                                                               
+! IUTMZNFL2(mxemdat) -integer - UTM zone for UTM projection                     
+! FEASTFL2(mxemdat)  -real    - False Easting (km) at projection origin         
+! FNORTHFL2(mxemdat) -real    - False Northing (km) at projection origin        
+! RNLAT0FL2(mxemdat) -real    - N. latitude & E. longitude of x=0 and y=0       
+! RELON0FL2(mxemdat)  (deg)     of map projection (Used only if PMAP =          
+!                               LCC, PS, EM, TTM or LAZA)                       
+!                               NOTE: longitude neg in western hemisphere       
+! RNLAT1FL2(mxemdat) - real   - Matching N. latitude(s) for projection          
+! RNLAT2FL2(mxemdat)  (deg)     (Used only if PMAP3= LCC, PS, or EM)            
+!                            LCC :  Projection cone slices through              
+!                                   Earth's surface at XLAT1 and XLAT2          
+!                            PS  :  Projection plane slices through             
+!                                   Earth at XLAT1                              
+!                            EM  :  Projection cylinder slices through          
+!                                   Earth at [+/-] XLAT1                        
+!                                                                               
+! ---  Variable data  ---                                                       
+!                                                                               
+!    NSTEP6(mxemdat) - integer  - Number of emission steps in                   
+!                                 current timestep                              
+! NDHRQB6(mxqstep,mxemdat) & NSECQB6(mxqstep,mxemdat)                           
+!                    - integer  - Starting time for which                       
+!                                 emissions data in current set of              
+!                                 records is valid                              
+!                                 (YYYYJJJHH & SSSS)                            
+! NDHRQE6(mxqstep,mxemdat) & NSECQE6(mxqstep,mxemdat)                           
+!                    - integer  - Ending time for which                         
+!                                 emissions data in current set of              
+!                                 records is valid                              
+!                                 (YYYYJJJHH & SSSS)                            
+! XFL2GRD(mxqstep,mxfl2) - real- X coordinate of a flare                        
+!                                 source in grid units                          
+!                                 (i.e., origin at (0.0,0.0))                   
+! YFL2GRD(mxqstep,mxfl2) - real- Y coordinate of a flare                        
+!                                 source in grid units                          
+!                                 (i.e., origin at (0.0,0.0))                   
+!  HTFL2(mxqstep,mxfl2) - real - Effective stack height (m)                     
+!  ELFL2(mxqstep,mxfl2) - real - Ground elevation (m) above sea                 
+!                                 level                                         
+!   DFL2(mxqstep,mxfl2) - real - Effective stack diameter (m)                   
+!   TFL2(mxqstep,mxfl2) - real - Effective stack temperature (K)                
+!   UFL2(mxqstep,mxfl2) - real - Effective exit velocity in x (m/s)             
+!   VFL2(mxqstep,mxfl2) - real - Effective exit velocity in y (m/s)             
+!   WFL2(mxqstep,mxfl2) - real - Effective exit velocity in z (m/s)             
+! SY0FL2(mxqstep,mxfl2) - real - Initial sigma y (m)                            
+! SZ0FL2(mxqstep,mxfl2) - real - Initial sigma z (m)                            
+! QFL2(mxspec,mxqstep,mxfl2)                                                    
+!                       - real - Emission rate (g/s) for each                   
+!                                 pollutant                                     
+!   NEWFL2(mxfl2)  - integer   - Number of puffs released by each               
+!                                 source during the current step                
+!                                                                               
+! ---  Character data ---                                                       
+!   CSLST6(mxspec) - char*12    - Species identifiers                           
+!     CID6(mxfl2) - char*16    - Source identifiers                             
+!                                                                               
+!  PMAPFL2(mxemdat)  -character - Character code for output map projection      
+!                                 UTM :  Universal Transverse Mercator          
+!                                 LCC :  Lambert Conformal Conic                
+!                                 PS  :  Polar Stereographic                    
+!                                 EM  :  Equatorial Mercator                    
+!                                 LAZA:  Lambert Azimuthal Equal Area           
+!                                 TTM :  Tangential Transverse Mercator         
+! UTMHEMFL2(mxemdat) -character - Base hemisphere for UTM projection            
+!                                 (S=southern, N=northern)                      
+! DATUMFL2(mxemdat)  -character - Datum-Region for grid coordinates             
+! DATENFL2(mxemdat)  -character - NIMA date for datum parameters                
+!                                 (MM-DD-YYYY  )                                
+! XYUNITFL2(mxemdat) -character - Units for coordinates (e.g., KM)              

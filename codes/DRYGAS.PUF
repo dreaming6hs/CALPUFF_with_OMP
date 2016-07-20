@@ -1,0 +1,57 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /DRYGAS/ -- Dry deposition parameters        CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/DRYGAS/pdiff(mxspec),alphas(mxspec),react(mxspec),                &
+     & rm(mxspec),henry(mxspec),rgg(mxspec),rgw1(mxspec),rcut(mxspec),         &
+     & rd1(mxspec),rcutr,rgr,reactr,pconst,bmin,bmax,qswmax,dconst1,           &
+     & dconst2,dconst3                                                          
+!                                                                               
+! --- COMMON BLOCK /DRYGAS/ Variables:                                          
+!       PDIFF(mxspec) - real    - Molecular diffusivity (m**2/s)                
+!                                 of each pollutant.                            
+!                                 SEE NOTE #1                                   
+!      ALPHAS(mxspec) - real    - Solubility enhancement factor due             
+!                                 to the aqueous phase reactivity of            
+!                                 the pollutant.                                
+!       REACT(mxspec) - real    - Reactivity factor for each                    
+!                                 pollutant.                                    
+!          RM(mxspec) - real    - Mesophyll resistance (s/m)                    
+!                                 SEE NOTE #2                                   
+!       HENRY(mxspec) - real    - Henry's law constant (ratio of                
+!                                 gas to aqueous phase concentration            
+!                                 of the pollutant).                            
+!         RGG(mxspec) - real    - Resistance (s/m) to direct                    
+!                                 transfer of the pollutant to the              
+!                                 ground.                                       
+!        RGW1(mxspec) - real    - Ratio of HENRY(i)/(ALPHAS(i)*d3)              
+!                                 where d3 is a constant.  Used in              
+!                                 computing resistance directly to              
+!                                 water surface.                                
+!        RCUT(mxspec) - real    - Cuticle resistance (s/m).                     
+!         RD1(mxspec) - real    - Ratio d1*SC**d2/k, where d1,d2 are            
+!                                 constants, SC is the Schmidt                  
+!                                 number, and k is the von Karman               
+!                                 constant                                      
+!               RCUTR - real    - Reference cuticle resistance (s/m)            
+!                                 SEE NOTE #2                                   
+!                 RGR - real    - Reference ground resistance (s/m)             
+!                                 SEE NOTE #2                                   
+!              REACTR - real    - Reference pollutant reactivity                
+!              PCONST - real    - Stomatal constant (m**2)                      
+!                BMIN - real    - Minimum width of the stomatal                 
+!                                 opening (m)                                   
+!                BMAX - real    - Maximum width of the stomatal                 
+!                                 opening (m)                                   
+!              QSWMAX - real    - Short-wave solar radiation (W/m**2)           
+!                                 level at which full opening of the            
+!                                 stomata occurs                                
+!     DCONST1,DCONST2 - real    - Empirical constants in deposition             
+!                                 layer resistance equation                     
+!             DCONST3 - real    - Constant in the "ground" resistance           
+!                                 to water surfaces                             
+!                                                                               
+!  NOTE #1: Input units of this variable are cm**2/s.  Conversion to m**2/s     
+!           is made internally in the SETUP phase.                              
+!                                                                               
+!  NOTE #2: Input units of s/cm are converted to s/m in the SETUP phase.        

@@ -1,0 +1,76 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /CTSGDAT/ -- Subgrid-scale complex terrain   CALPUFF         
+!                               information                                     
+!----------------------------------------------------------------------         
+!                                                                               
+      common/CTSGDAT/NHILL,NCTREC,MHILL,                                       &
+     & XHILL2M,ZHILL2M,XCTDMKM,YCTDMKM,XMETCT0M,YMETCT0M,                      &
+     & HILLDAT(11,mxhill),XRCT(mxrect),YRCT(mxrect),ELRECT(mxrect),            &
+     & IHILL(mxrect)                                                            
+!                                                                               
+! --- COMMON BLOCK /CTSGDAT/ Variables:                                         
+!                                                                               
+!                  NHILL - integer  - Number of subgrid-scale terrain           
+!                                     features                                  
+!                 NCTREC - integer  - Number of special complex terrain         
+!                                     receptors                                 
+!                  MHILL - integer  - Method for input of hill terrain          
+!                                     data                                      
+!                                       1 = Created by CTDM processor           
+!                                           programs (in CTDM format)           
+!                                       2 = Created by CALPUFF OPTHILL          
+!                                           processor & read in Input           
+!                                           Group (6b)                          
+!                XHILL2M - real     - scale factor to convert horizontal        
+!                                     hill dimensions to meters for             
+!                                     MHILL=1 (CTDM Files)                      
+!                ZHILL2M - real     - scale factor to convert vertical          
+!                                     hill dimensions to meters for             
+!                                     MHILL=1 (CTDM Files)                      
+!                XCTDMKM - real     - x-origin of CTDM coordinate system        
+!                                     referenced to "UTM" coordinate            
+!                                     system used in CALPUFF (km)               
+!                                     MHILL=1 (CTDM Files)                      
+!                YCTDMKM - real     - y-origin of CTDM coordinate system        
+!                                     referenced to "UTM" coordinate            
+!                                     system used in CALPUFF (km)               
+!                                     MHILL=1 (CTDM Files)                      
+!               XMETCT0M - real     - x-origin of CTDM coordinate system        
+!                                     referenced to SW corner of                
+!                                     CALPUFF MET grid (m)                      
+!                                     MHILL=1 (CTDM Files)                      
+!               YMETCT0M - real     - y-origin of CTDM coordinate system        
+!                                     referenced to SW corner of                
+!                                     CALPUFF MET grid (m)                      
+!                                     MHILL=1 (CTDM Files)                      
+!     HILLDAT(11,mxhill) - real     - Hill data for MHILL=2                     
+!                          (1,-)= XC -- X coordinate of center of hill          
+!                                 (met. grid units)                             
+!                          (2,-)= YC -- Y coordinate of center of hill          
+!                                 (met. grid units)                             
+!                          (3,-)= THETAH -- Orientation of major axis of        
+!                                 hill (clockwise from North)                   
+!                          (4,-)= ZGRID -- Height of the "zero-plane"           
+!                                 of the grid above mean sea level              
+!                          (5,-)= RELIEF -- Height of the crest of the          
+!                                 hill above the grid elevation                 
+!                          (6,-)= EXPO 1 -- Hill-shape exponent for the         
+!                                 major axis                                    
+!                          (7,-)= EXPO 2 -- Hill-shape exponent for the         
+!                                 major axis                                    
+!                          (8,-)= SCALE 1 -- Horizontal length scale            
+!                                 along the major axis                          
+!                          (9,-)= SCALE 2 -- Horizontal length scale            
+!                                 along the minor axis                          
+!                         (10,-)= AMAX -- Maximum allowed axis length           
+!                                 for the major axis                            
+!                         (11,-)= BMAX -- Maximum allowed axis length           
+!                                 for the major axis                            
+!           XRCT(mxrect) - real     - X coordinate of complex terrain           
+!                                     receptor (met. grid units)                
+!           YRCT(mxrect) - real     - Y coordinate of complex terrain           
+!                                     receptor (met. grid units)                
+!         ELRECT(mxrect) - real     - Ground elevation (m MSL) of each          
+!                                     complex terrain receptor                  
+!          IHILL(mxrect) - integer  - Hill number associated with each          
+!                                     complex terrain receptor                  

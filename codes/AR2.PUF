@@ -1,0 +1,162 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AR2/ -- Variable Area source data           CALPUFF         
+!                                                                               
+!----------------------------------------------------------------------         
+!                                                                               
+      character*12 cslst3                                                       
+      character*16 cid3,baemunit                                                
+                                                                                
+      logical*4 lutmar2,llccar2,lpsar2,lemar2,llazaar2,lttmar2                  
+      character*4 utmhemar2,xyunitar2                                           
+      character*8 datumar2,pmapar2                                              
+      character*12 datenar2                                                     
+                                                                                
+      common/AR2/NAR2,NSE3,                                                    &
+     &      IBSRC3(mxemdat),IESRC3(mxemdat),IUEM3(mxemdat),                    &
+     &      IBDATHR3(mxemdat),IBSEC3(mxemdat),IEDATHR3(mxemdat),               &
+     &      IESEC3(mxemdat),XTZ3(mxemdat),T2BTZ3(mxemdat),                     &
+     &      XMWEM3(mxspec),IXREM3(mxspec),                                     &
+     &      lutmar2(mxemdat),llccar2(mxemdat),lpsar2(mxemdat),                 &
+     &      lemar2(mxemdat),llazaar2(mxemdat),lttmar2(mxemdat),                &
+     &      iutmznar2(mxemdat),feastar2(mxemdat),fnorthar2(mxemdat),           &
+     &      rnlat0ar2(mxemdat),relon0ar2(mxemdat),                             &
+     &      rnlat1ar2(mxemdat),rnlat2ar2(mxemdat),NSTEP3(mxemdat),             &
+     &      NDHRQB3(mxqstep,mxemdat),NSECQB3(mxqstep,mxemdat),                 &
+     &      NDHRQE3(mxqstep,mxemdat),NSECQE3(mxqstep,mxemdat),                 &
+     &      XAR2GRD(mxvertp1,mxqstep,mxarea),                                  &
+     &      YAR2GRD(mxvertp1,mxqstep,mxarea),NVERT2(mxarea),                   &
+     &      HTAR2(mxqstep,mxarea),TKAR2(mxqstep,mxarea),                       &
+     &      ELAR2(mxqstep,mxarea),WEFAR2(mxqstep,mxarea),                      &
+     &      REFAR2(mxqstep,mxarea),SZ0AR2(mxqstep,mxarea),                     &
+     &      AREA2(mxqstep,mxarea),QAR2(mxspec,mxqstep,mxarea),                 &
+     &      NEWAR2(mxarea),NTR0,                                               &
+     &      CSLST3(mxspec),CID3(mxarea),BAEMUNIT(mxarea),                      &
+     &      pmapar2(mxemdat),utmhemar2(mxemdat),datumar2(mxemdat),             &
+     &      datenar2(mxemdat),xyunitar2(mxemdat)                                
+!                                                                               
+! --- COMMON BLOCK /AR2/ Variables:                                             
+!                                                                               
+!             NAR2 - integer  - Number of discrete area sources                 
+!             NSE3 - integer  - Number of emitted species in files              
+!  IBSRC3(mxemdat) - integer  - Index for first source in a                     
+!                               BAEMARB.DAT file                                
+!  IESRC3(mxemdat) - integer  - Index for last source in a                      
+!                               BAEMARB.DAT file                                
+!   IUEM3(mxemdat) - integer  - Emission rate units flag in MOD6 format         
+!                                 1 = g/s                                       
+!                                 2 = g/s/m2                                    
+! IBDATHR3(mxemdat)- integer  - Date/hour at beginning of period for            
+!                               the first data record in the file               
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IBSEC3(mxemdat) - integer  - Seconds of the first data record in the         
+!                               file  (0000-3599)                               
+! IEDATHR3(mxemdat)- integer  - Date/hour at end of period for                  
+!                               the last data record in the file                
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IESEC3(mxemdat) - integer  - Seconds of the last data record in the          
+!                               file  (0000-3599)                               
+!    XTZ3(mxemdat) - real     - Time zone (UTC=LST+XTZ3)                        
+!  T2BTZ3(mxemdat) - real     - Hours to ADD to Local Time to obtain            
+!                               Base Time (xtz3-xbtz)                           
+!   XMWEM3(mxspec) - real     - Molecular weight for each species               
+!   IXREM3(mxspec) - integer  - Cross referencing array of NSE3                 
+!                               values relating species ordering                
+!                               in the emissions file to the                    
+!                               ordering in the main conc. array                
+!                                                                               
+! --- MAP Projection Variables ---                                              
+!                                                                               
+! LUTMAR2(mxemdat)  - logical*4 - Flag for Universal Transverse Mercator        
+! LLCCAR2(mxemdat)  - logical*4 - Flag for Lambert Conformal Conic              
+! LPSAR2(mxemdat)   - logical*4 - Flag for Polar Stereographic                  
+! LEMAR2(mxemdat)   - logical*4 - Flag for Equatorial Mercator                  
+! LLAZAAR2(mxemdat) - logical*4 - Flag for Lambert Azimuthal Equal Area         
+! LTTMAR2(mxemdat)  - logical*4 - Flag for Tangential Transverse Mercator       
+!                                                                               
+! IUTMZNAR2(mxemdat) - integer - UTM zone for UTM projection                    
+! FEASTAR2(mxemdat)  - real    - False Easting (km) at projection origin        
+! FNORTHAR2(mxemdat) - real    - False Northing (km) at projection origin       
+! RNLAT0AR2(mxemdat),- real    - N. latitude & E. longitude of x=0 and y=0      
+! RELON0AR2(mxemdat) (deg)       of map projection (Used only if PMAP =         
+!                                LCC, PS, EM, TTM or LAZA)                      
+!                                NOTE: longitude neg in western hemisphere      
+! RNLAT1AR2(mxemdat), - real   - Matching N. latitude(s) for projection         
+! RNLAT2AR2(mxemdat) (deg)       (Used only if PMAP3= LCC, PS, or EM)           
+!                         LCC :  Projection cone slices through                 
+!                                Earth's surface at XLAT1 and XLAT2             
+!                         PS  :  Projection plane slices through                
+!                                Earth at XLAT1                                 
+!                         EM  :  Projection cylinder slices through             
+!                                Earth at [+/-] XLAT1                           
+!                                                                               
+! ---  Variable data  ---                                                       
+!                                                                               
+!  NSTEP3(mxemdat) - integer  - Number of emission steps in                     
+!                               current timestep                                
+! NDHRQB3(mxqstep,mxemdat) & NSECQB3(mxqstep,mxemdat)                           
+!                  - integer  - Starting time for which                         
+!                               emissions data in current set of                
+!                               records is valid                                
+!                               (YYYYJJJHH & SSSS)                              
+! NDHRQE3(mxqstep,mxemdat) & NSECQE3(mxqstep,mxemdat)                           
+!                  - integer  - Ending time for which                           
+!                               emissions data in current set of                
+!                               records is valid                                
+!                               (YYYYJJJHH & SSSS)                              
+! XAR2GRD(mxvertp1,mxqstep,mxarea)                                              
+!                      - real - X coordinate of a vertex of a                   
+!                               discrete area source in grid units              
+!                               (i.e., origin at (0.0,0.0))                     
+! YAR2GRD(mxvertp1,mxqstep,mxarea)                                              
+!                      - real - Y coordinate of a vertex of a                   
+!                               discrete area source in grid units              
+!                               (i.e., origin at (0.0,0.0))                     
+!   NVERT2(mxarea) - real     - Number of sides bounding area                   
+!                                                                               
+! (NOTE:  The mean x,y for the polygon is computed as vertex NVERT+1)           
+!                                                                               
+!        HTAR2(mxqstep,mxarea) - real     - Effective release height (m)        
+!        ELAR2(mxqstep,mxarea) - real     - Elevation of ground (m)             
+!        TKAR2(mxqstep,mxarea) - real     - Temperature of release (K)          
+!       WEFAR2(mxqstep,mxarea) - real     - Effective rise velocity (m/s)       
+!       REFAR2(mxqstep,mxarea) - real     - Effective radius of source (m)      
+!       SZ0AR2(mxqstep,mxarea) - real     - Initial sigma-z of source (m)       
+!  QAR2(mxspec,mxqstep,mxarea) - real     - Emission rate (g/s) for each        
+!                                           pollutant                           
+!        AREA2(mxqstep,mxarea) - real     - Area of each source (m^2)           
+!               NEWAR2(mxarea) - integer  - Number of puffs released by each    
+!                                           source during the current step      
+!                                                                               
+! (NOTE:  The initial sigma-y is computed as function of wind direction)        
+!                                                                               
+!                                                                               
+! ---  Numerical Plume Rise Data ---                                            
+!                                                                               
+!                         NTR0 - integer  - Default number of points in         
+!                                           trajectory arrays                   
+!                                                                               
+!                                                                               
+! ---  Character data ---                                                       
+!                                                                               
+!   CSLST3(mxspec) - char*12    - Species identifiers                           
+!     CID3(mxarea) - char*16    - Source identifiers                            
+! BAEMUNIT(mxarea) - char*16    - Emissions units for each source               
+!                                 ('g/m2/s'  OR  'g/s')                         
+!                                                                               
+!                                                                               
+! PMAPAR2(mxemdat) - character - Character code for output map projection       
+!                                UTM :  Universal Transverse Mercator           
+!                                LCC :  Lambert Conformal Conic                 
+!                                PS  :  Polar Stereographic                     
+!                                EM  :  Equatorial Mercator                     
+!                                LAZA:  Lambert Azimuthal Equal Area            
+!                                TTM :  Tangential Transverse Mercator          
+! UTMHEMAR2(mxemdat)- character - Base hemisphere for UTM projection            
+!                                (S=southern, N=northern)                       
+! DATUMAR2(mxemdat) - character - Datum-Region for grid coordinates             
+! DATENAR2(mxemdat) - character - NIMA date for datum parameters                
+!                                (MM-DD-YYYY  )                                 
+! XYUNITAR2(mxemdat)- character - Units for coordinates (e.g., KM)              
+                                                                                

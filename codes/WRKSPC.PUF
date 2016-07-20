@@ -1,0 +1,22 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /WRKSPC/ -- Temporary work arrays            CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/WRKSPC/tmp1(mxnx,mxny),nw1,tmp2(mxnx,mxny),nw2,                   &
+     & tmp3(mxrec),tmp4(mxrec),tmp5(mxrect),tmp6(mxrect),                      &
+     & tmp7(mxnxg,mxnyg),tmp8(mxnxg,mxnyg)                                      
+!                                                                               
+! --- COMMON BLOCK /WRKSPC/ Variables:                                          
+!                                                                               
+!       TMP1(mxnx,mxny) - real    - Work array number 1                         
+!                   NW1 - integer - Length of work array TMP1                   
+!                                   (in words)                                  
+!       TMP2(mxnx,mxny) - real    - Work array number 2                         
+!                   NW2 - integer - Length of work array TMP2                   
+!                                   (in words)                                  
+!           TMP3(mxrec) - real    - Work array number 3                         
+!           TMP4(mxrec) - real    - Work array number 4                         
+!          TMP5(mxrect) - real    - Work array number 5                         
+!          TMP6(mxrect) - real    - Work array number 6                         
+!     TMP7(mxnxg,mxnyg) - real    - Work array number 7                         
+!     TMP8(mxnxg,mxnyg) - real    - Work array number 8                         

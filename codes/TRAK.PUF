@@ -1,0 +1,62 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /TRAK/ -- arrays for PUFF-TRACKING Output    CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/TRAK/idathrtrak(mxtrak),isectrak(mxtrak),                         &
+     &            xkmtrak(mxtrak),ykmtrak(mxtrak),hmtrak(mxtrak),              &
+     &            sytrak(mxtrak),sztrak(mxtrak),zitrak(mxtrak),                &
+     &            zimaxtrak(mxtrak),tsectrak(mxtrak),dmtrak(mxtrak),           &
+     &            icodetrak(mxtrak),irlstrak,isrctrak,ityptrak,ntrk             
+!                                                                               
+! --- COMMON BLOCK /TRAK/ Variables:                                            
+!                                                                               
+! IDATHRTRAK(mxtrak) - integer - Date-Hour of snapshot (YYYYJJJHH)              
+!   ISECTRAK(mxtrak) - integer - Second of snapshot (SSSS)                      
+!                                (10:36PM - HH=22  SSSS=2160)                   
+!    XKMTRAK(mxtrak) - real    - X coordinate (km) of puff center               
+!                               (or youngest end of slug)                       
+!    YKMTRAK(mxtrak) - real    - Y coordinate (km) of puff center               
+!                               (or youngest end of slug)                       
+!     HMTRAK(mxtrak) - real    - Height above ground (m) of puff center         
+!     SYTRAK(mxtrak) - real    - Sigma y (m) for the puff center (or            
+!                                youngest end of slug) with BID                 
+!     SZTRAK(mxtrak) - real    - Sigma z (m) for the puff center (or            
+!                                youngest end of slug) with BID                 
+!     ZITRAK(mxtrak) - real    - Last mixing ht. (m) for the puff               
+!  ZIMAXTRAK(mxtrak) - real    - Highest mixing ht. (m) to which puff           
+!                                has been exposed                               
+!   TSECTRAK(mxtrak) - real    - Total integrated travel time (s) of            
+!                                the puff (or youngest end of slug)             
+!     DMTRAK(mxtrak) - real    - Total integrated travel distance (m) of        
+!                                the puff (or youngest end of slug)             
+!  ICODETRAK(mxtrak) - integer - Puff status code:                              
+!                                1 = Puff within mixed layer & Gaussian         
+!                                2 = Puff within mixed layer & uniform          
+!                                3 = Puff above mixed layer & Gaussian          
+!                                4 = Puff above mixed layer & uniform           
+!                                5 = Puff currently above mixed layer           
+!                                    (but previously below) & Gaussian          
+!                                6 = Puff currently above mixed layer           
+!                                    (but previously below) & uniform           
+!                               11 = Slug within mixed layer & Gaussian         
+!                               12 = Slug within mixed layer & uniform          
+!                               13 = Slug above mixed layer & Gaussian          
+!                               14 = Slug above mixed layer & uniform           
+!                               15 = Slug currently above mixed layer           
+!                                    (but previously below) & Gaussian          
+!                               16 = Slug currently above mixed layer           
+!                                    (but previously below) & uniform           
+!                               99 = Puff/slug off computational grid           
+!           ISRCTRAK - integer - Source ID number                               
+!           ITYPTRAK - integer - Source type number                             
+!                                Source Types are:                              
+!                                1 = Point         Constant Emissions           
+!                                2 = Point         Variable Emissions           
+!                                3 = Poly. Area    Constant Emissions           
+!                                4 = Poly. Area    Variable Emissions           
+!                                5 = Line          Constant Emissions           
+!                                6 = Line          Variable Emissions           
+!                                7 = Volume        Constant Emissions           
+!                                8 = Grid Volume   Variable Emissions           
+!                                9 = Boundary Condition                         
+!              NTRK - integer - Number of tracking steps stored                 

@@ -1,0 +1,30 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AMBIENT/ -- Selected met. data at one       CALPUFF         
+!                               grid cell;  used in numerical                   
+!                               plume rise computation                          
+!----------------------------------------------------------------------         
+!                                                                               
+      common/AMBIENT/nza,nzap1,zfacea(mxprfp1),zgpta(mxprfz),                  &
+     & uamb(mxprfz),ramb(mxprfz),dedz(mxprfp1),tamb(mxprfz),                   &
+     & tamb0,ramb0,adia,ptgrad0                                                 
+!                                                                               
+! --- COMMON BLOCK /AMBIENT/ Variables:                                         
+!                                                                               
+!                    NZA - integer - Number of layers                           
+!                  NZAP1 - integer - Number of layers                           
+!        ZFACEA(mxprfp1) - real    - Heights (m) of cell faces                  
+!          ZGPTA(mxprfz) - real    - Heights (m) of grid points                 
+!                                    (cell centers)                             
+!           UAMB(mxprfz) - real    - Wind speed profile (m/s) - winds           
+!                                    defined at cell CENTERS                    
+!           RAMB(mxprfz) - real    - Ambient air density profile                
+!                                    (kg/m^3) - defined at cell CENTERS         
+!          DEDZ(mxprfp1) - real    - Pot. temperature gradient profile          
+!                                    (K/m) - defined at cell FACES              
+!           TAMB(mxprfz) - real    - Temperature profile (K) - defined          
+!                                    at cell CENTERS                            
+!                  TAMB0 - real    - Surface air temperature (K)                
+!                  RAMB0 - real    - Surface air density (kg/m^3)               
+!                   ADIA - real    - Dry adiabatic lapse rate (deg. K/m)        
+!                PTGRAD0 - real    - Minimum potential temperature lapse        
+!                                    rate (deg. K/m)                            

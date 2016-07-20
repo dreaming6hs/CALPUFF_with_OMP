@@ -1,0 +1,33 @@
+!-----------------------------------------------------------------------        
+! --- COMMON BLOCK /CONST/ --- CTSG constants                    CALPUFF        
+!-----------------------------------------------------------------------        
+                                                                                
+      common/const/ zero,one,two,three,four,half,twoby3,rt2,                   &
+     &              pi,pii,piby2,twopi,rtpi,rtpii,rt2pi,dtor,                  &
+     &              alphai,small,expmax,hslfac,epsint,                         &
+     &              epsrefl,mxrefl                                              
+!-----------------------------------------------------------------------        
+!     DEFINITIONS       [i]=integer     [r]=real        [a]=array               
+!-----------------------------------------------------------------------        
+! rt2           square root of 2                                     [r]        
+! pi            (3.14159)                                            [r]        
+! pii           1/pi                                                 [r]        
+! piby2         pi/2                                                 [r]        
+! twopi         2*pi                                                 [r]        
+! rtpi          square root pi                                       [r]        
+! rtpii         1/rtpi                                               [r]        
+! rt2pi         square root 2*pi                                     [r]        
+! dtor          degrees-to-radians factor                            [r]        
+! alphai        factor for converting length scale at half the hill  [r]        
+!               height to length scale of the hill-shape function               
+! small         used to signify when a computed difference is        [r]        
+!               considered "zero"                                               
+! expmax        maximum argument allowed for EXP function            [r]        
+! hslfac        fraction of cut-off hill height used as a minimum    [r]        
+!               streamline height for obtaining distortion factors              
+! epsint        fractional convergence criterion used in integration [r]        
+!               subroutine QATR                                                 
+! epsrefl       fractional convergence criterion used to exit loop   [r]        
+!               over reflection terms in vertical distribution factor           
+! mxrefl        maximum number of reflections allowed from mixing lid[i]        
+!----------------------------------------------------------------------         

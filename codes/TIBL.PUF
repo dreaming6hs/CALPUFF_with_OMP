@@ -1,0 +1,23 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /TIBL/ -- Current TIBL Arrays                CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      parameter (mxtibl=10)                                                     
+      common/TIBL/ntibl,ixtibl(mxtibl),iytibl(mxtibl),mdtibl(mxtibl),          &
+     &            htibl(mxtibl),tstibl(mxtibl),                                &
+     &            x2zi1,x2zi2,xupgrd
+!                                                                               
+! --- COMMON BLOCK /TIBL/ Variables:                                            
+!                                                                               
+!                NTIBL - integer - Number of sampling sub-steps defined         
+!   I[X,Y]TIBL(mxtibl) - integer - Cell (i,j) for surface properties            
+!       MDTIBL(mxtibl) - integer - MET grid domain for I[X,Y]TIBL               
+!        HTIBL(mxtibl) - real    - Average TIBL height (m) for sub-step         
+!       TSTIBL(mxtibl) - real    - Sampling time for sub-step as a              
+!                                  fraction of full sampling step               
+!                x2zi1 - real    - Effective distance (m) from coast to         
+!                                  start transition to CALMET mixing hts        
+!                x2zi2 - real    - Effective distance (m) from coast to         
+!                                  stop transition to CALMET mixing hts         
+!               xupgrd - real    - Distance (met grid) upwind of source         
+!                                  to search for a coast segment                

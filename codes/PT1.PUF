@@ -1,0 +1,79 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /PT1/ -- Emission parameters for sources     CALPUFF         
+!                           with constant emission characeristics               
+!----------------------------------------------------------------------         
+      character*16 cnampt1                                                      
+      character*40 csfpt1                                                       
+!                                                                               
+      common/PT1/XPT1GRD(mxpt1),YPT1GRD(mxpt1),HTSTAK(mxpt1),                  &
+     & ELSTAK(mxpt1),DIAM(mxpt1),EXITW(mxpt1),TSTAK(mxpt1),                    &
+     & IDOWNW(mxpt1),QSTAK(mxspec,mxpt1),NPT1,                                 &
+     & syipt1(mxpt1),szipt1(mxpt1),fmfpt1(mxpt1),zplatpt1(mxpt1),              &
+     & NEWPT1(mxpt1),BWIDTH(36,mxpt1),BHT(36,mxpt1),                           &
+     & BLN1(36,mxpt1),XBADJ1(36,mxpt1),YBADJ1(36,mxpt1),IPTU,NSPT1,            &
+     & IDSFPT1(mxspec,mxpt1),IXREFPT1(mxsppt1),                                &
+     & FQCVPT1(mxpt1),CNAMPT1(mxpt1),CSFPT1(mxsppt1)                            
+!                                                                               
+! --- COMMON BLOCK /PT1/ Variables:                                             
+!        XPT1GRD(mxpt1) - real     - X coordinate of the stack (in met.         
+!                                    grid units w/ origin at (0.0,0.0))         
+!        YPT1GRD(mxpt1) - real     - Y coordinate of the stack (in met.         
+!                                    grid units w/ origin at (0.0,0.0))         
+!         HTSTAK(mxpt1) - real     - Stack height (m)                           
+!         ELSTAK(mxpt1) - real     - Stack base elevation (m) above             
+!                                    sea level                                  
+!           DIAM(mxpt1) - real     - Stack diameter (m)                         
+!          EXITW(mxpt1) - real     - Exit velocity (m/s)                        
+!          TSTAK(mxpt1) - real     - Exit temperature (deg. K)                  
+!         IDOWNW(mxpt1) - real     - Building downwash flag (0=no, 1=yes)       
+!   QSTAK(mxspec,mxpt1) - real     - Emission rate (g/s) for each               
+!                                    pollutant                                  
+!                  NPT1 - integer  - Number of sources with constant            
+!                                    emission parameters                        
+!         SYIPT1(mxpt1) - real     - Initial sigma-y (m)  [optional]            
+!         SZIPT1(mxpt1) - real     - Initial sigma-z (m)  [optional]            
+!         FMFPT1(mxpt1) - real     - Momentum flux factor (0 or 1)              
+!       ZPLATPT1(mxpt1) - real     - Platform height (m AGL) [optional]         
+!         NEWPT1(mxpt1) - integer  - Number of puffs released by each           
+!                                    source during the current time step        
+!      BWIDTH(36,mxpt1) - real     - Wind direction specific building           
+!                                    widths (m)                                 
+!         BHT(36,mxpt1) - real     - Wind direction specific building           
+!                                    heights (m)                                
+!        BLN1(36,mxpt1) - real     - Wind direction specific building           
+!                                    lengths (m)                                
+!      XBADJ1(36,mxpt1) - real     - Wind direction specific along-wind         
+!                                    distance from stack to center of           
+!                                    upwind face of projected building,         
+!                                    x-axis lies along the flow (m)             
+!      YBADJ1(36,mxpt1) - real     - Wind direction specific cross-wind         
+!                                    distance from stack to center of           
+!                                    upwind face of projected building,         
+!                                    x-axis lies along the flow (m)             
+!                  IPTU - integer  - Units for emission rates in                
+!                                    control file                               
+!                                    1:   g/s                                   
+!                                    2:  kg/hr                                  
+!                                    3:  lb/hr                                  
+!                                    4:  ton/yr                                 
+!                                    5:  Odour Unit * m**3/s                    
+!                                    6:  Odour Unit * m**3/min                  
+!                                    7:  metric tons/yr                         
+!                                    8:  Bq/s  (Bq = becquerel = disintegrations
+!                                    9:  GBq/yr                                 
+!                 NSPT1 - integer  - Number of source-species pairs             
+!                                    with emissions scaling factors             
+! IDSFPT1(mxspec,mxpt1) - integer  - Pointer to point-species pair              
+!                                    index, 0 to NSPT1                          
+!                                    (0 if no scaling)                          
+!    IXREFPT1(mxsppt1) - integer   - Cross-reference pointer from               
+!                                    point-species pairs to                     
+!                                    scale-factor tables                        
+!      CSFPT1(mxsppt1) - c*40 arr  - List of scale-factor table names           
+!                                    for point-species pairs                    
+!                                                                               
+!        CNAMPT1(mxpt1) - c*16 arr - Source names                               
+!                                                                               
+!        FQCVPT1(mxpt1) - real     - Fraction of emission rate captured         
+!                                    in the cavity                              
+                                                                                

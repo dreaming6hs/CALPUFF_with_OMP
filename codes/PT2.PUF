@@ -1,0 +1,168 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /PT2/ -- Pt. source emission parameters      CALPUFF         
+!                           Arbitrarily-varying (PTEMARB)                       
+!----------------------------------------------------------------------         
+!                                                                               
+      character*12 cslst2                                                       
+      character*16 cid2                                                         
+                                                                                
+      logical*4 lutmpt2,llccpt2,lpspt2,lempt2,llazapt2,lttmpt2                  
+      character*4 utmhempt2,xyunitpt2                                           
+      character*8 datumpt2,pmappt2                                              
+      character*12 datenpt2                                                     
+                                                                                
+      common/PT2/NPT2,NSE2,MFPT2(mxemdat),                                     &
+     &   IBSRC2(mxemdat),IESRC2(mxemdat),                                      &
+     &   IBDATHR2(mxemdat),IBSEC2(mxemdat),IEDATHR2(mxemdat),                  &
+     &   IESEC2(mxemdat),XTZ2(mxemdat),T2BTZ2(mxemdat),                        &
+     &   XMWEM2(mxspec),IXREM2(mxspec),TIEM2(8,mxpt2),                         &
+     &   BHT2(36,mxpt2),BWD2(36,mxpt2),BLN2(36,mxpt2),                         &
+     &   XBADJ2(36,mxpt2),YBADJ2(36,mxpt2),ZPLATPT2(mxpt2),                    &
+     &   lutmpt2(mxemdat),llccpt2(mxemdat),lpspt2(mxemdat),                    &
+     &   lempt2(mxemdat),llazapt2(mxemdat),lttmpt2(mxemdat),                   &
+     &   iutmznpt2(mxemdat),feastpt2(mxemdat),fnorthpt2(mxemdat),              &
+     &   rnlat0pt2(mxemdat),relon0pt2(mxemdat),                                &
+     &   rnlat1pt2(mxemdat),rnlat2pt2(mxemdat),NSTEP2(mxemdat),                &
+     &   NDHRQB2(mxqstep,mxemdat),NSECQB2(mxqstep,mxemdat),                    &
+     &   NDHRQE2(mxqstep,mxemdat),NSECQE2(mxqstep,mxemdat),                    &
+     &   TSTAK2(mxqstep,mxpt2),EXITW2(mxqstep,mxpt2),                          &
+     &   SYIPT2(mxqstep,mxpt2),SZIPT2(mxqstep,mxpt2),                          &
+     &   QSTAK2(mxspec,mxqstep,mxpt2),NEWPT2(mxpt2),                           &
+     &   FQCVPT2(mxpt2),                                                       &
+     &   CSLST2(mxspec),CID2(mxpt2),                                           &
+     &   pmappt2(mxemdat),utmhempt2(mxemdat),datumpt2(mxemdat),                &
+     &   datenpt2(mxemdat),xyunitpt2(mxemdat)                                   
+!                                                                               
+! --- COMMON BLOCK /PT2/ Variables:                                             
+!             NPT2 - integer    - Number of pt. sources in the file             
+!             NSE2 - integer    - Number of emitted species in the file         
+!   MFPT2(mxemdat) - integer    - Flag for file type                            
+!                                 0: UNFORMATTED                                
+!                                 1: FORMATTED                                  
+!  IBSRC2(mxemdat) - integer  - Index for first source in a PTEMARB.DAT         
+!                               file                                            
+!  IESRC2(mxemdat) - integer  - Index for last source in a PTEMARB.DAT          
+!                               file                                            
+! IBDATHR2(mxemdat)- integer  - Date/hour at beginning of period for            
+!                               the first data record in the file               
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IBSEC2(mxemdat) - integer  - Seconds of the first data record in the         
+!                               file  (0000-3599)                               
+! IEDATHR2(mxemdat)- integer  - Date/hour at end of period for                  
+!                               the last data record in the file                
+!                               (YYYYJJJHH, where YYYY=year,                    
+!                               JJJ=Julian day, HH=hour [00-23 LST])            
+!  IESEC2(mxemdat) - integer  - Seconds of the last data record in the          
+!                               file  (0000-3599)                               
+!    XTZ2(mxemdat) - real     - Time zone (UTC=LST+XTZ2)                        
+!  T2BTZ2(mxemdat) - real     - Hours to ADD to Local Time to obtain            
+!                               Base Time (xtz3-xbtz)                           
+!   XMWEM2(mxspec) - real       - Molecular weight for each species             
+!   IXREM2(mxspec) - integer    - Cross referencing array of NSE2               
+!                                 values relating species ordering              
+!                                 in the emissions file to the                  
+!                                 ordering in the main conc. array              
+!   TIEM2(8,mxpt2) - real       - Time-invariant data for arbitrarily-          
+!                                 varying point source emissions                
+!                                 (1,-) = X coordinate of source (in            
+!                                         met. grid units -- converted          
+!                                         from UTM data in PTEMARB file)        
+!                                 (2,-) = Y coordinate of source (in            
+!                                         met. grid units -- converted          
+!                                         from UTM data in PTEMARB file)        
+!                                 (3,-) = Stack height (m)                      
+!                                 (4,-) = Stack diameter (m)                    
+!                                 (5,-) = Stack base elevation (m)              
+!                                 (6,-) = Building downwash flag                
+!                                         0. No downwash                        
+!                                         1. Downwash bldgs on surface          
+!                                         2. Downwash bldgs raised              
+!                                 (7,-) = Vertical momentum flux factor         
+!                                         (0.0 to 1.0) to simulate rain         
+!                                         hat structures                        
+!                                 (8,-) = User-defined flag (e.g.,              
+!                                         fuel code)                            
+!  ZPLATPT2(mxpt2) - real       - Platform height for elevated bldgs (m)        
+!                                 (provided if BDW flag is 2.)                  
+!   BHT2(36,mxpt2) - real       - Array of direction-specific bldg hts          
+!                                 (above platform if BDW flag is 2.)            
+!                                 for each 10 deg. from N (m)                   
+!   BWD2(36,mxpt2) - real       - Array of direction-specific building          
+!                                 widths for each 10 deg. from N (m)            
+!   BLN2(36,mxpt2) - real       - Wind direction specific building              
+!                                 lengths (m)                                   
+! XBADJ2(36,mxpt2) - real       - Wind direction specific along-wind            
+!                                 distance from stack to center of              
+!                                 upwind face of projected building,            
+!                                 x-axis lies along the flow (m)                
+! YBADJ2(36,mxpt2) - real       - Wind direction specific cross-wind            
+!                                 distance from stack to center of              
+!                                 upwind face of projected building,            
+!                                 x-axis lies along the flow (m)                
+!                                                                               
+! --- MAP Projection Variables ---                                              
+!                                                                               
+! LUTMPT2(mxemdat)  - logical*4 - Flag for Universal Transverse Mercator        
+! LLCCPT2(mxemdat)  - logical*4 - Flag for Lambert Conformal Conic              
+! LPSPT2(mxemdat)   - logical*4 - Flag for Polar Stereographic                  
+! LEMPT2(mxemdat)   - logical*4 - Flag for Equatorial Mercator                  
+! LLAZAPT2(mxemdat) - logical*4 - Flag for Lambert Azimuthal Equal Area         
+! LTTMPT2(mxemdat)  - logical*4 - Flag for Tangential Transverse Mercator       
+!                                                                               
+! IUTMZNPT2(mxemdat) - integer - UTM zone for UTM projection                    
+! FEASTPT2(mxemdat)  - real    - False Easting (km) at projection origin        
+! FNORTHPT2(mxemdat) - real    - False Northing (km) at projection origin       
+! RNLAT0PT2(mxemdat),- real    - N. latitude & E. longitude of x=0 and y=0      
+! RELON0PT2(mxemdat) (deg)       of map projection (Used only if PMAP =         
+!                                LCC, PS, EM, TTM or LAZA)                      
+!                                NOTE: longitude neg in western hemisphere      
+! RNLAT1PT2(mxemdat), - real   - Matching N. latitude(s) for projection         
+! RNLAT2PT2(mxemdat) (deg)       (Used only if PMAP3= LCC, PS, or EM)           
+!                            LCC :  Projection cone slices through              
+!                                   Earth's surface at XLAT1 and XLAT2          
+!                            PS  :  Projection plane slices through             
+!                                   Earth at XLAT1                              
+!                            EM  :  Projection cylinder slices through          
+!                                   Earth at [+/-] XLAT1                        
+!                                                                               
+! ---  Variable data  ---                                                       
+!    NSTEP2(mxemdat) - integer  - Number of emission steps in                   
+!                                 current timestep                              
+! NDHRQB2(mxqstep,mxemdat) & NSECQB2(mxqstep,mxemdat)                           
+!                    - integer  - Starting time for which                       
+!                                 emissions data in current set of              
+!                                 records is valid                              
+!                                 (YYYYJJJHH & SSSS)                            
+! NDHRQE2(mxqstep,mxemdat) & NSECQE2(mxqstep,mxemdat)                           
+!                    - integer  - Ending time for which                         
+!                                 emissions data in current set of              
+!                                 records is valid                              
+!                                 (YYYYJJJHH & SSSS)                            
+!         TSTAK2(mxqstep,mxpt2) - real     - Exit temperature (deg. K)          
+!         EXITW2(mxqstep,mxpt2) - real     - Exit velocity (m/s)                
+!         SYIPT2(mxqstep,mxpt2) - real     - Initial sigma-y (m)                
+!         SZIPT2(mxqstep,mxpt2) - real     - Initial sigma-z (m)                
+!  QSTAK2(mxspec,mxqstep,mxpt2) - real     - Emission rate (g/s) for each       
+!      NEWPT2(mxpt2) - integer  - Number of puffs released by each              
+!                                 source during the current time step           
+!                FQCVPT2(mxpt2) - real     - Fraction of emission rate          
+!                                            captured in the cavity             
+!                                                                               
+! ---  Character data ---                                                       
+!   CSLST2(mxspec) - char*12    - Species identifiers                           
+!      CID2(mxpt2) - char*16    - Source identifiers                            
+!                                                                               
+!  PMAPPT2(mxemdat) - character - Character code for output map projection      
+!                                 UTM :  Universal Transverse Mercator          
+!                                 LCC :  Lambert Conformal Conic                
+!                                 PS  :  Polar Stereographic                    
+!                                 EM  :  Equatorial Mercator                    
+!                                 LAZA:  Lambert Azimuthal Equal Area           
+!                                 TTM :  Tangential Transverse Mercator         
+! UTMHEMPT2(mxemdat)- character - Base hemisphere for UTM projection            
+!                                 (S=southern, N=northern)                      
+! DATUMPT2(mxemdat) - character - Datum-Region for grid coordinates             
+! DATENPT2(mxemdat) - character - NIMA date for datum parameters                
+!                                 (MM-DD-YYYY  )                                
+! XYUNITPT2(mxemdat)- character - Units for coordinates (e.g., KM)              

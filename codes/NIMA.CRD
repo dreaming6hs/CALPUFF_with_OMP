@@ -1,0 +1,34 @@
+!************************************************************                   
+!                                                                               
+! --- BUILD manufactored NIMA INCLUDE statement                                 
+! --- NIMA.CRD                                                                  
+! --- Uses NIMA text file dated: 02-21-2003                                     
+! --- Uses BUILD version: VERSION 1.3                                           
+!                                                                               
+!************************************************************                   
+!                                                                               
+      Parameter (ndt = 132)                                                     
+      Parameter (nd = 234)                                                      
+!                                                                               
+! --- Stamp this NIMA include file                                              
+      Character*12 daten                                                        
+      Parameter (daten='02-21-2003  ')                                          
+!                                                                               
+      Character*60 geodat1, geodat2, geodat3                                    
+      Character*8 datcod                                                        
+      Character*52 datum                                                        
+      Character*20 atlas                                                        
+      Character*12 dateb,dstamp                                                 
+!                                                                               
+      Real*4 dxmod, dymod, dzmod                                                
+      Real*8 dradim, dflat, dec2                                                
+!                                                                               
+      Integer*4 dattyp                                                          
+!                                                                               
+      common /datr4/ dxmod(nd), dymod(nd), dzmod(nd)                            
+      common /datr8/ dradim(nd), dflat(nd), dec2(nd)                            
+      common /datchr/ datcod(nd), geodat1(nd), geodat2(nd),                    &
+     & geodat3(nd), atlas(ndt), datum(ndt),                                    &
+     & dstamp,dateb                                                             
+      common /dati4/ kmax, nudat, dattyp(nd)                                    
+!                                                                               

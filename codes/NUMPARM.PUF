@@ -1,0 +1,36 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /NUMPARM/ -- Parameters used in the          CALPUFF         
+!                               numerical plume rise algorithm                  
+!----------------------------------------------------------------------         
+!                                                                               
+      common/NUMPARM/gravi,rgas,zmin,ds0,nstep,slast,rp,alphap(mxent),         &
+     & betap(mxent),xcat(mxentp1),nent,phicheck                                 
+!                                                                               
+! --- COMMON BLOCK /NUMPARM/ Variables:                                         
+!                                                                               
+!         GRAVI - real    - Acceleration due to gravity (m/s**2)                
+!          RGAS - real    - Gas constant (m**2/s**2/deg. K)                     
+!          ZMIN - real    - Minimum plume centerline height (m)                 
+!           DS0 - real    - Step size (m) in the numerical plume                
+!                           rise algorithm                                      
+!         NSTEP - integer - Internal save frequency of plume rise               
+!                           calculations (i.e., every DS*NSTEP meters)          
+!                           (NOTE: this the frequency with which the            
+!                           results are saved internally -- not that            
+!                           passed back from the NUMRISE routine)               
+!         SLAST - real    - Termination distance (m) of the plume rise          
+!                           calculation                                         
+!            RP - real    - Radiation coefficient (kg/m**2/deg. K**3/s)         
+!   ALPHAP(mxent) - real array - Perturbed entrainment coefficients             
+!                                (parallel)                                     
+!    BETAP(mxent) - real array - Perturbed entrainment coefficients             
+!                                (normal)                                       
+!   XCAT(mxentp1) - real array - Downwind distances (m) for which each          
+!                                perturbed entrainment coefficient              
+!                                (ALPHAP, BETAP) is valid (NENT+1 values        
+!                                for NENT entrainment coefficients).            
+!            NENT - integer    - Number of perturbed entrainment                
+!                                coefficients entered                           
+!       PHICHECK - real   - plume axis elevation angle (radians) at             
+!                           which PRIME module checks for building              
+!                           wake 'capture'                                      

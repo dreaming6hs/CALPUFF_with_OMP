@@ -1,0 +1,70 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /GEN/ -- General run control information,    CALPUFF         
+!                           file types                                          
+!----------------------------------------------------------------------         
+!                                                                               
+      character*12 cspec,cgrup                                                  
+!                                                                               
+      common/gen/ibyr,ibmo,ibdy,ibhr,ibsec,nsecdt,irlg,iavg,                   &
+     & ibdathr,iedathr,iesec,nspec,nsdd,nse,ngrup,                             &
+     & isplst(4,mxspec),cspec(mxspec),xmol(mxspec),cgrup(mxgrup),              &
+     & ispgrp(mxspec),metfm,mprffm,metrun,mrestart,nrespd                       
+!                                                                               
+!                                                                               
+! --- COMMON BLOCK /GEN/ Variables:                                             
+!             IBYR - integer - Beginning year of run (four digits)              
+!             IBMO - integer - Beginning month of run                           
+!             IBDY - integer - Beginning day of run                             
+!             IBHR - integer - Beginning hour of run                            
+!            IBSEC - integer - Beginning second of run                          
+!           NSECDT - integer - Length of model timestep (seconds)               
+!             IRLG - integer - Run length (in timesteps, NSECDT)                
+!             IAVG - integer - Length of averaging period for all               
+!                              output (in timesteps, NSECDT)                    
+!          IBDATHR - integer - Beginning date-hour (YYYYJJJHH)                  
+!          IEDATHR - integer - Ending date-hour (YYYYJJJHH)                     
+!            IESEC - integer - Ending second of run                             
+!            NSPEC - integer - Total number of chemical species                 
+!                              (advected + steady-state species)                
+!             NSDD - integer - Number of species dry deposited                  
+!              NSE - integer - Number of species emitted                        
+!            NGRUP - integer - Number of Species-Groups                         
+! ISPLST(4,mxspec) - integer - Flags indicating which species are               
+!                              (1,-)=modeled, (2,-) emitted (0=NO, 1=YES),      
+!                              (3,-)=dry deposition flag (0=no dep.,            
+!                              1=resistance model (gas), 2=resistance           
+!                              model (particle), 3=user-specified)              
+!                              (4,-)=species-group flag (0=not in group,        
+!                              1=group1, 2=group2, etc.)                        
+!    CSPEC(mxspec) - char*12 - List of chemical species                         
+!     XMOL(mxspec) - real    - Molecular weight for each species                
+!    CGRUP(mxgrup) - char*12 - List of names for grouped species                
+!   ISPGRP(mxspec) - integer - Index of group to which species belong           
+!            METFM - integer - Meteorological data input format flag            
+!                                 1 = CALMET/AUSMET binary format               
+!                                     (CALMET.DAT, AUSMET.DAT)                  
+!                                 2 = ISC ASCII file (ISCMET.DAT)               
+!                                 3 = AUSPLUME ASCII file (PLMMET.DAT)          
+!                                 4 = CTDM PROFILE & SURFACE files              
+!                                 5 = AERMET PROFILE & SURFACE files            
+!           MPRFFM - integer - Meteorological Profile Data Format               
+!                                 1 = CTDM plus tower file (PROFILE.DAT)        
+!                                 2 = AERMET tower file (PROFILE.DAT)           
+!           METRUN - integer - Option to run ALL of the met periods             
+!                              found in the met files                           
+!                                 0 = Run period defined by the user            
+!                                 1 = Run all periods found                     
+!         MRESTART - integer - Option to create/use a restart file              
+!                                 0 = No restart files read or written          
+!                                 1 = Old restart file used at start            
+!                                     of a continuation run with "old"          
+!                                     puffs from the preceding period;          
+!                                 2 = New restart file made during run          
+!                                 3 = Old restart file used at start            
+!                                     of a continuation run with "old"          
+!                                     puffs from the preceding period;          
+!                                     << AND >>                                 
+!                                     New restart file made during run          
+!           NRESPD - integer - Number of periods in Restart output cycle        
+!                                 0 = File written only at last period          
+!                                >0 = File updated every NRESPD periods         

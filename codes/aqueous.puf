@@ -1,0 +1,18 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AQUEOUS/ -- Aqueous data                    CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/AQUEOUS/scavu(mxspec),scavm(mxspec)                                
+!                                                                               
+! --- COMMON BLOCK /AQUEOUS/ Variables:                                         
+!                                                                               
+!         SCAVU(mxspec) - real  - Array of scavenging coefficients              
+!                                 (1/sec) for each pollutant                    
+!                                 calculated from aqueous chemistry             
+!                                 module in the layer above the mixing          
+!                                 height                                        
+!         SCAVM(mxspec) - real  - Array of scavenging coefficients              
+!                                 (1/sec) for each pollutant                    
+!                                 calculated from aqueous chemistry             
+!                                 module in the layer below the mixing          
+!                                 height                                        

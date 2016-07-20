@@ -1,0 +1,59 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /MAP/ -- Map Projection & Datum              CALPUFF         
+!----------------------------------------------------------------------         
+      logical*4 lutm,llcc,lps,lem,llaza,lttm                                    
+      character*4 utmhem                                                        
+      character*8 datum,pmap                                                    
+      character*12 daten                                                        
+      character*16 clat0,clon0,clat1,clat2                                      
+!                                                                               
+      common/map/lutm,llcc,lps,lem,llaza,lttm,                                 &
+     &           iutmzn,feast,fnorth,                                          &
+     &           rnlat0,relon0,rlat0,rlon0,xlat1,xlat2,                        &
+     &           pmap,utmhem,datum,daten,clat0,clon0,clat1,clat2                
+!                                                                               
+! --- COMMON BLOCK /MAP/ Variables:                                             
+!                                                                               
+! LUTM          - logical*4 - Flag for Universal Transverse Mercator            
+! LLCC          - logical*4 - Flag for Lambert Conformal Conic                  
+! LPS           - logical*4 - Flag for Polar Stereographic                      
+! LEM           - logical*4 - Flag for Equatorial Mercator                      
+! LLAZA         - logical*4 - Flag for Lambert Azimuthal Equal Area             
+! LTTM          - logical*4 - Flag for Tangential Transverse Mercator           
+!                                                                               
+! IUTMZN        - integer   - UTM zone for UTM projection                       
+! FEAST  (km)   - real      - False Easting at projection origin                
+! FNORTH (km)   - real      - False Northing at projection origin               
+! RNLAT0,       - real      - N. latitude & E. longitude of x=0 and y=0         
+! RELON0 (deg)                of map projection (Used only if PMAP =            
+!                             LCC, PS, EM, TTM or LAZA)                         
+!                             NOTE: longitude neg in western hemisphere         
+! RLAT0,RLON0   - real      - N. latitude & W. longitude of x=0 and y=0         
+!                             of map projection (degrees, + = N,W)              
+!                             (Much of code written for W. Longitude,           
+!                              so RLAT0=RNLAT0 and RLON0=-RELON0                
+! XLAT1,        - real      - Matching N. latitude(s) for projection            
+! XLAT2 (deg)                 (Used only if PMAP= LCC, PS, or EM)               
+!                             LCC :  Projection cone slices through             
+!                                    Earth's surface at XLAT1 and XLAT2         
+!                             PS  :  Projection plane slices through            
+!                                    Earth at XLAT1                             
+!                             EM  :  Projection cylinder slices through         
+!                                    Earth at [+/-] XLAT1                       
+! PMAP          - character - Character code for output map projection          
+!                             UTM :  Universal Transverse Mercator              
+!                             LCC :  Lambert Conformal Conic                    
+!                             PS  :  Polar Stereographic                        
+!                             EM  :  Equatorial Mercator                        
+!                             LAZA:  Lambert Azimuthal Equal Area               
+!                             TTM :  Tangential Transverse Mercator             
+! UTMHEM        - character - Base hemisphere for UTM projection                
+!                             (S=southern, N=northern)                          
+! DATUM         - character - Datum-Region for grid coordinates                 
+! DATEN         - character - NIMA date for datum parameters                    
+!                             (MM-DD-YYYY  )                                    
+! CLAT0         - character - Character version of RNLAT0                       
+! CLON0         - character - Character version of RELON0                       
+! CLAT1         - character - Character version of XLAT1                        
+! CLAT2         - character - Character version of XLAT2                        
+                                                                                

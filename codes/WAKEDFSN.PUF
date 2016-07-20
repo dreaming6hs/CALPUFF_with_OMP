@@ -1,0 +1,40 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /WAKEDFSN/ -- Parameters used in the        CALPUFF          
+!                                PRIME turbulence and diffusion                 
+!                                subroutines                                    
+!----------------------------------------------------------------------         
+!                                                                               
+      real rurliz(6),rurliy(6),urbniz(6),urbniy(6)                              
+      common/WAKEDFSN/afac,xbyrmax,wiz0,wiy0,wfz,wfy,                          &
+     &                dua_ua,xdecay,xdecayi,                                   &
+     &                rurliz,rurliy,urbniz,urbniy,                             &
+     &                ambiz,ambiy                                               
+!                                                                               
+! --- COMMON BLOCK /WAKEDFSN/ Variables:                                        
+!                                                                               
+!          AFAC - real    - Diffusion transitions to ambient (with              
+!                           virtual source) when wake turbulence decays         
+!                           to AFAC*(ambient turbulence intensity) for          
+!                           PG classes 4, 5, and 6                              
+!       XBYRMAX - real    - Upper limit on distance from upwind face            
+!                           of bldg to transition point for ambient             
+!                           diffusion                                           
+!       WIZ,WIY - real    - Base Turbulence intensities in wake                 
+!       WFZ,WFY - real    - Scaling factors for sigmaz and sigmay               
+!        DUA_UA - real    - [Ua-U]/Ua in wake at downwind face of bldg          
+!                                U: average speed in wake                       
+!                               Ua: ambient speed                               
+!         DECAY - real    - Exponent for turbulence intensity change            
+!                           with distance from downwind face of bldg            
+!        DECAYI - real    - 1/DECAY                                             
+!                                                                               
+! --- Ambient turbulence intensities inferred from Briggs (1973)                
+! --- "Diffusion estimation for small emissions", ATDL-106;                     
+!     RURLIZ(6) - real    - Rural turbulence intensities in z                   
+!     RURLIY(6) - real    - Rural turbulence intensities in y                   
+!     URBNIZ(6) - real    - Urban turbulence intensities in z                   
+!     URBNIY(6) - real    - Urban turbulence intensities in y                   
+!                                                                               
+! --- Current ambient turbulence intensities                                    
+!         AMBIZ - real    - Turbulence intensity in z (vertical)                
+!         AMBIY - real    - Turbulence intensity in y (horizontal)              

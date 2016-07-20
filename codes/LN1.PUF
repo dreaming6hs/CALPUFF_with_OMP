@@ -1,0 +1,86 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /LN1/ -- Emission parameters for buoyant     CALPUFF         
+!                           line sources                                        
+!----------------------------------------------------------------------         
+      character*16 cnamln1                                                      
+      character*40 csfln1                                                       
+!                                                                               
+      common/LN1/NLINES,XL,HBL,WBL,WML,DXL,FPRIMEL,WSEP,FPTOT,FBPT,            &
+     & XLBEGGRD(mxlines),YLBEGGRD(mxlines),XLENDGRD(mxlines),                  &
+     & YLENDGRD(mxlines),HSL(mxlines),BELEVL(mxlines),                         &
+     & XVERTL(4,mxlines),YVERTL(4,mxlines),ARLINE(mxlines),                    &
+     & XLBAR,YLBAR,ORIENTL,MXNSEG,NSEG(mxlines),QTL(mxspec,mxlines),           &
+     & NEWLN1(mxlines),NLRISE,ILNU,NSLN1,                                      &
+     & IDSFLN1(mxspec,mxlines),IXREFLN1(mxspln),                               &
+     & CNAMLN1(mxlines),CSFLN1(mxspln)                                          
+!                                                                               
+! --- COMMON BLOCK /LINES/ variables:                                           
+!                NLINES - integer    - Number of line sources                   
+!                    XL - real       - Average line source length (m)           
+!                   HBL - real       - Average line source height (m)           
+!                   WBL - real       - Average building width (m)               
+!                   WML - real       - Average line source width (m)            
+!                   DXL - real       - Average building separation (m)          
+!               FPRIMEL - real       - Average buoyancy parameter/line          
+!                                      in units of (m**4/s**3)                  
+!                  WSEP - real       - Average separation between lines         
+!                                      (WBL+DXL)  (m)                           
+!                 FPTOT - real       - Total buoyancy parameter                 
+!                                      (FPRIMEL*NLINES)                         
+!                  FBPT - real       - "Point Source" buoyancy parameter        
+!                                      (FPTOT/pi)                               
+!     XLBEGGRD(mxlines) - real array - Beginning X coordinate of the lines      
+!                                      (in met. grid units w/ origin at         
+!                                      (0.0,0.0))                               
+!     YLBEGGRD(mxlines) - real array - Beginning Y coordinate of the lines      
+!                                      (in met. grid units w/ origin at         
+!                                      (0.0,0.0))                               
+!     XLENDGRD(mxlines) - real array - Ending X coordinate of the lines         
+!                                      (in met. grid units w/ origin at         
+!                                      (0.0,0.0))                               
+!     YLENDGRD(mxlines) - real array - Ending Y coordinate of the lines         
+!                                      (in met. grid units w/ origin at         
+!                                      (0.0,0.0))                               
+!          HSL(mxlines) - real array - Pollutant release height (m)             
+!       BELEVL(mxlines) - real array - Base elevation (MSL) of line             
+!     XVERTL(4,mxlines) - real array - X-coord. (met grid) of vertices          
+!                                      defining 4 corners of each line          
+!     YVERTL(4,mxlines) - real array - Y-coord. (met grid) of vertices          
+!                                      defining 4 corners of each line          
+!       ARLINE(mxlines) - real array - Area of line source (m**2)               
+!           XLBAR,YLBAR - real       - Center of array of lines (met grid)      
+!               ORIENTL - real       - Orientation of array of lines            
+!                                      (radians, CW from N)                     
+!                MXNSEG - integer    - Upper limit on number of segments        
+!                                      along line from which slugs are          
+!                                      generated                                
+!         NSEG(mxlines) - real array - Number of segments used for line         
+!                                      in current step                          
+!   QTL(mxspec,mxlines) - real array - Pollutant emission rates (g/s)           
+!                                      for each line                            
+!       NEWLN1(mxlines) - integer arr- Number of puffs released by each         
+!                                      source during the current step           
+!                NLRISE - integer    - Number of points used to tabulate        
+!                                      plume rise from block of lines           
+!                  ILNU - integer    - Units for emission rates in              
+!                                      control file                             
+!                                      1:   g/s                                 
+!                                      2:  kg/hr                                
+!                                      3:  lb/hr                                
+!                                      4:  ton/yr                               
+!                                      5:  Odour Unit * m**3/s                  
+!                                      6:  Odour Unit * m**3/min                
+!                                      7:  metric tons/yr                       
+!                                      8:  Bq/s  (Bq = becquerel = disintegratio
+!                                      9:  GBq/yr                               
+!                   NSLN1 - integer  - Number of source-species pairs           
+!                                      with emissions scaling factors           
+! IDSFLN1(mxspec,mxlines) - integer  - Pointer to line-species pair             
+!                                      index, 0 to NSLN1                        
+!                                      (0 if no scaling)                        
+!        IXREFLN1(mxspln) - integer  - Cross-reference pointer from             
+!                                      line-species pairs to                    
+!                                      scale-factor tables                      
+!          CSFLN1(mxspln) - c*40 arr - List of scale-factor table names         
+!                                      for line-species pairs                   
+!        CNAMLN1(mxlines) - c*16 arr - Source names                             

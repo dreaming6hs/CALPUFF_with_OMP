@@ -1,0 +1,181 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /FILNAM/ -- CALPUFF file names               CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      integer nmetdat(mxmetdom),imetdat(mxmetdom)                               
+      character*132 pufinp,metdat,iscdat,plmdat,puflst,condat,                 &
+     & dfdat,wfdat,visdat,t2ddat,rhodat,lndat,ozdat,vddat,                     &
+     & chemdat,hildat,rctdat,prfdat,sfcdat,rstartb,rstarte,                    &
+     & cstdat,bdydat,flxdat,baldat,bcndat,fogdat,h2o2dat,debug,                &
+     & risdat,trkdat,nh3zdat                                                    
+      character*132 metdatl(mxmetdat,mxmetdom),metdoml(mxmetdom)                
+      character*132 ptdat(mxemdat),ardat(mxemdat),voldat(mxemdat)               
+      character*132 fldat(mxemdat)                                              
+      character*16 auxext                                                       
+      logical lcfiles                                                           
+!                                                                               
+      common/filnam/nmetdatall,nmetdat,nmetdom,imetdat,                        &
+     & nptdat,nardat,nvoldat,nfldat,nlndat,                                    &
+     & pufinp,metdat,metdatl,metdoml,iscdat,plmdat,puflst,condat,              &
+     & dfdat,wfdat,visdat,t2ddat,rhodat,ptdat,voldat,ardat,lndat,              &
+     & fldat,ozdat,vddat,chemdat,                                              &
+     & hildat,rctdat,prfdat,sfcdat,rstartb,rstarte,                            &
+     & cstdat,bdydat,flxdat,baldat,bcndat,fogdat,h2o2dat,debug,                &
+     & risdat,trkdat,nh3zdat,auxext                                             
+      common/fillog/lcfiles                                                     
+!                                                                               
+! --- COMMON BLOCK /FILNAM/, /FILLOG/ Variables:                                
+!        NMETDATALL- integer- Number of names provided in METDATL for           
+!                             all met grids combined                            
+! NMETDAT(mxmetdom)- integer- Number of names provided in METDATL for           
+!                             each met grid (master and nested grids)           
+!          NMETDOM - integer- Number of met domains (master + nested)           
+! IMETDAT(mxmetdom)- integer- Current METDATL file being used for               
+!                             each met grid (master and nested grids)           
+!          NPTDAT - integer - Number of names provided in PTDAT                 
+!          NARDAT - integer - Number of names provided in ARDAT                 
+!         NVOLDAT - integer - Number of names provided in VOLDAT                
+!          NFLDAT - integer - Number of names provided in FLDAT                 
+!          NLNDAT - integer - Number of names provided in LNDAT                 
+!                             (must be 0 or 1)                                  
+!          PUFINP - char*132- Path & filename for the control file              
+!                             (default: CALPUFF.INP)                            
+!          METDAT - char*132- Path & filename for the CALMET                    
+!                             binary meteorological file in                     
+!                             CALPUFF/CALGRID format when single file           
+!                             is used                                           
+!                             (default: CALMET.DAT)                             
+! METDATL(mxmetdat,mxmetdom)                                                    
+!                 - char*132- Path & filename for the LIST of CALMET            
+!                   array     binary meteorological files                       
+! METDOML(mxmetdom)                                                             
+!                 - char*132- List of names for CALMET domains                  
+!                   array                                                       
+!          ISCDAT - char*132- Path & filename for the ISC-type of               
+!                             ASCII meteorological file                         
+!                             (default: ISCMET.DAT)                             
+!          PLMDAT - char*132- Path & filename for the AUSPLUME-type of          
+!                             ASCII meteorological file                         
+!                             (default: PLMMET.DAT)                             
+!          PUFLST - char*132- Path & filename for the output CALPUFF            
+!                             list file                                         
+!                             (default: CALPUFF.LST)                            
+!          CONDAT - char*132- Path & filename for the output CALPUFF            
+!                             unformatted concentration file                    
+!                             (default: CONC.DAT)                               
+!           DFDAT - char*132- Path & filename for the output CALPUFF            
+!                             unformatted dry deposition flux file              
+!                             (default: DF.DAT)                                 
+!           WFDAT - char*132- Path & filename for the output CALPUFF            
+!                             unformatted wet deposition flux file              
+!                             (default: WF.DAT)                                 
+!          VISDAT - char*132- Path & filename for the output CALPUFF            
+!                             RH data file for visibility calculations          
+!                             (default: VISB.DAT)                               
+!          T2DDAT - char*132- Path & filename for the output CALPUFF            
+!                             2D Temperature data file for visibility           
+!                             related processing                                
+!                             (default: TK2D.DAT)                               
+!          RHODAT - char*132- Path & filename for the output CALPUFF            
+!                             2D Density data file for visibility               
+!                             related processing                                
+!                             (default: RHO2D.DAT)                              
+!  PTDAT(mxemdat) - char*132- Path & filename for the input CALPUFF             
+!                             file(s) containing point source emissions         
+!                             with arbitrarily-varying source and               
+!                             emission parameters                               
+!                             (default: PTEMARB.DAT, for 1 file)                
+!  FLDAT(mxemdat) - char*132- Path & filename for the input CALPUFF             
+!                             file(s) containing FLARE sources with             
+!                             arbitrarily-varying location and                  
+!                             emissions                                         
+!                             (default: FLEMARB.DAT, for 1 file)                
+! VOLDAT(mxemdat) - char*132- Path & filename for the input CALPUFF             
+!                             file(s) containing volume sources                 
+!                             with arbitrarily-varying source and               
+!                             emission parameters                               
+!                             (default: VOLEMARB.DAT, for 1 file)               
+!  ARDAT(mxemdat) - char*132- Path & filename for the input CALPUFF             
+!                             file(s) containing buoyant area sources           
+!                             with arbitrarily-varying location and             
+!                             emissions                                         
+!                             (default: BAEMARB.DAT, for 1 file)                
+!           LNDAT - char*132- Path & filename for the input CALPUFF             
+!                             file containing buoyant line sources              
+!                             with arbitrarily-varying location and             
+!                             emissions                                         
+!                             (default: LNEMARB.DAT)                            
+!           OZDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with hourly ozone monitoring data            
+!                             (default: OZONE.DAT)                              
+!           VDDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with user-specified deposition               
+!                             velocities                                        
+!                             (default: VD.DAT)                                 
+!         CHEMDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with user-specified chemical                 
+!                             transformation rates                              
+!                             (default: CHEM.DAT)                               
+!          HILDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with CTSG hill specifications from           
+!                             the CTDM terrain processor                        
+!                             (default: HILL.DAT)                               
+!          RCTDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with CTSG receptors from the                 
+!                             CTDM receptor generator                           
+!                             (default: HILLRCT.DAT)                            
+!          PRFDAT - char*132- Path & filename for the input CALPUFF             
+!                             file for "tower" met data, including              
+!                             turbulence data                                   
+!                             (default: PROFILE.DAT)                            
+!          SFCDAT - char*132- Path & filename for the input CALPUFF             
+!                             file of surface parameters                        
+!                             (default: SURFACE.DAT)                            
+!         RSTARTB - char*132- Path & filename for the RESTART file used         
+!                             at beginning of continuation run                  
+!         RSTARTE - char*132- Path & filename for the RESTART file made         
+!                             during current run (last update at end)           
+!          CSTDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with coast line data used with               
+!                             sub-grid TIBL module                              
+!                             (default: COASTLN.DAT)                            
+!          BDYDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with boundary data used for mass             
+!                             flux module                                       
+!                             (default: FLUXBDY.DAT)                            
+!          FLXDAT - char*132- Path & filename for the output CALPUFF            
+!                             file with hourly mass flux data                   
+!                             (default: MASSFLX.DAT)                            
+!          BALDAT - char*132- Path & filename for the output CALPUFF            
+!                             file with hourly mass balance data                
+!                             (default: MASSBAL.DAT)                            
+!          BCNDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with boundary condition data                 
+!                             (default: BCON.DAT)                               
+!          FOGDAT - char*132- Path & filename for the output CALPUFF            
+!                             file with data for FOG processor                  
+!                             (default: FOG.DAT)                                
+!         H2O2DAT - char*132- Path & filename for the input CALPUFF             
+!                             file with hourly H2O2 monitoring data             
+!                             (default: H2O2.DAT)                               
+!           DEBUG - char*132- Path & filename for the output CALPUFF            
+!                             file containing debug puff/slug data              
+!                             (default: DEBUG.DAT)                              
+!          RISDAT - char*132- Path & filename for the output CALPUFF            
+!                             file with intermediate data from numerical        
+!                             rise module                                       
+!                             (default: RISE.DAT)                               
+!          TRKDAT - char*132- Path & filename for the output CALPUFF            
+!                             file with PUFF-TRACKING data                      
+!                             (default: PFTRAK.DAT)                             
+!         NH3ZDAT - char*132- Path & filename for the input CALPUFF             
+!                             file with vertical NH3 concentration profile      
+!                             (default: NH3Z.DAT)                               
+!          AUXEXT - char*16 - filename extension (with dot) for                 
+!                             auxiliary CALMET 2D/3D data files                 
+!                             Expected input is without the dot                 
+!                             (default: AUX)                                    
+!         LCFILES - logical - Switch indicating if all characters in the        
+!                             filenames are to be converted to lower case       
+!                             letters (LCFILES=T) or converted to UPPER         
+!                             case letters (LCFILES=F).                         

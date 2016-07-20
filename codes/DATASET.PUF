@@ -1,0 +1,77 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /DATASET/ -- CALPUFF dataset versions        CALPUFF         
+!----------------------------------------------------------------------         
+                                                                                
+      character*16 vercmet,verisc,verplm,verprf,versfc                          
+      character*16 verparb,veraarb,verlarb,vervarb                              
+      character*16 veroz,verh2o2,vercoast,verflxb,verbcon,verrest               
+      character*16 verflarb                                                     
+                                                                                
+      common/dataset/ vercmet(mxmetdom),verisc,verplm,verprf,versfc,           &
+     &                verparb(mxemdat),veraarb(mxemdat),                       &
+     &                verlarb,vervarb(mxemdat),verflarb(mxemdat),              &
+     &                veroz,verh2o2,vercoast,verflxb,verbcon,verrest            
+                                                                                
+!                                                                               
+! --- COMMON BLOCK /DATASET/ Variables:                                         
+!         VERCMET - char*16 - Version of the CALMET                             
+!                             binary meteorological file in                     
+!                             CALPUFF/CALGRID format                            
+!                             (CALMET.DAT)                                      
+!          VERISC - char*16 - Version of the ISC-type of                        
+!                             ASCII meteorological file                         
+!                             (ISCMET.DAT)                                      
+!          VERPLM - char*16 - Version of the AUSPLUME-type of                   
+!                             ASCII meteorological file                         
+!                             (PLMMET.DAT)                                      
+!          VERPRF - char*16 - Version of the input CALPUFF                      
+!                             file for "tower" met data, including              
+!                             turbulence data                                   
+!                             (PROFILE.DAT)                                     
+!          VERSFC - char*16 - Version of the input CALPUFF                      
+!                             file of surface parameters                        
+!                             (SURFACE.DAT)                                     
+!         VERPARB - char*16 - Version of the input CALPUFF                      
+!                             file(s) containing point source emissions         
+!                             with arbitrarily-varying source and               
+!                             emission parameters                               
+!                             (PTEMARB.DAT)                                     
+!         VERVARB - char*16 - Version of the input CALPUFF                      
+!                             file(s) containing volume sources                 
+!                             with arbitrarily-varying source and               
+!                             emission parameters                               
+!                             (VOLEMARB.DAT)                                    
+!         VERAARB - char*16 - Version of the input CALPUFF                      
+!                             file(s) containing buoyant area sources           
+!                             with arbitrarily-varying location and             
+!                             emissions                                         
+!                             (BAEMARB.DAT)                                     
+!         VERLARB - char*16 - Version of the input CALPUFF                      
+!                             file containing buoyant line sources              
+!                             with arbitrarily-varying location and             
+!                             emissions                                         
+!                             (LNEMARB.DAT)                                     
+!        VERFLARB - char*16 - Version of the input CALPUFF                      
+!                             file(s) containing flare sources                  
+!                             with arbitrarily-varying location and             
+!                             emissions                                         
+!                             (FLEMARB.DAT)                                     
+!           VEROZ - char*16 - Version of the input CALPUFF                      
+!                             file with hourly ozone monitoring data            
+!                             (OZONE.DAT)                                       
+!         VERH2O2 - char*16 - Version of the input CALPUFF                      
+!                             file with hourly H2O2 monitoring data             
+!                             (H2O2.DAT)                                        
+!        VERCOAST - char*16 - Version of the input CALPUFF                      
+!                             file with coast line data used with               
+!                             sub-grid TIBL module                              
+!                             (COASTLN.DAT)                                     
+!         VERFLXB - char*16 - Version of the input CALPUFF                      
+!                             file with boundary data used for mass             
+!                             flux module                                       
+!                             (FLUXBDY.DAT)                                     
+!         VERBCON - char*16 - Version of the input CALPUFF                      
+!                             file with boundary condition data                 
+!                             (BCON.DAT)                                        
+!         VERREST - char*16 - Version of the RESTART file                       
+!                             (RESTART.DAT)                                     

@@ -1,0 +1,122 @@
+!-----------------------------------------------------------------------        
+! --- COMMON BLOCK /CSIGMA/ -- Dispersion coefficient constants  CALPUFF        
+!-----------------------------------------------------------------------        
+!                                                                               
+      common/csigma/ayt,azt(6),syh,szh,thfty,thftz,tyidr,tzidr,tzisdr,         &
+     &              avefac,avefaci,yz0fac(mxnx,mxny,mxmetdom),                 &
+     &              az0fac(mxnx,mxny,mxmetdom),                                &
+     &              bz0trm(mxnx,mxny,mxmetdom),                                &
+     &              aypgt(6),bypgt(6),aypgti(6),bypgti(6),                     &
+     &              azpgt(6),bzpgt(6),                                         &
+     &              ayurb(6),xiyurb(6),azurb(6),xizurb(6),                     &
+     &              nzbrur(6),xzbrur(10,6),                                    &
+     &              azrur(10,6),bzrur(10,6),                                   &
+     &              idoptys,idoptzs,irus,uavgs,kstabs,els,bvfs,mhftszs,        &
+     &              tsigvs,tsigws,symins,szmins,ixcell,iycell,mdcell            
+!                                                                               
+! --- COMMON BLOCK /CSIGMA/ Variables:                                          
+!                                                                               
+!                                                                               
+! *** For MDISP = all                                                           
+!     Heffter(1965) time dependent growth coeffs. for long range.               
+!                  AYT  - real const - Time dependent Y growth rate for         
+!                                      all PGT classes.                         
+!               AZT(6)  - real array - Time dependent Z growth rates for        
+!                                      each PGT class.                          
+!                  SYH  - real const - Horizontal sigma (m) beyond which        
+!                                      time dependent growth assumed.           
+!                  SZH  - real const - Vertical sigma (m) beyond which          
+!                                      time dependent growth assumed.           
+!                THFTY  - real       - Virtual travel time (s) associated       
+!                                      with SYH for "current" met.;             
+!                                      transition to Heffter growth law.        
+!                THFTZ  - real       - Virtual travel time (s) associated       
+!                                      with SZH for "current" met.;             
+!                                      transition to Heffter growth law.        
+!                                                                               
+! *** For MDISP = 1,2                                                           
+!     Dispersion determined by local turbulence (sigv,sigw) and the             
+!     Irwin(1983) recommended forms of (fy,fz) of Draxler(1976):                
+!     fy = 1.0 / (1.0 + 0.9 * sqrt(tyidr * t) )                                 
+!     fz = 1.0 / (1.0 + 0.9 * sqrt(tzidr * t) )         for L < 0               
+!     fz = 1.0 / (1.0 + 0.945 * (tzisdr * t)**0.806 )   for L > 0               
+!                TYIDR  - real const - Reciprocal time scale (1/s) for          
+!                                      Draxler form of fy.                      
+!                TZIDR  - real const - Reciprocal time scale (1/s) for          
+!                                      Draxler form of fz for L < 0             
+!               TZISDR  - real const - Reciprocal time scale (1/s) for          
+!                                      Draxler stable form of fz (L > 0)        
+!                                                                               
+! *** For MDISP = 3                                                             
+!     Pasquill-Gifford-Turner(PGT) coeffs. for RURAL conditions.                
+!     Values of coeffs. and exponents from ISC approximations.                  
+!              NZBRUR(6)- int. array - Number segments per PGT class.           
+!           XZBRUR(10,6)- real array - Junction x's (km) per PGT class.         
+!            AZRUR(10,6)- real array - PGT Z coeffs. for each PGT class.        
+!            BZRUR(10,6)- real array - PGT Z expons. for each PGT class.        
+!                                                                               
+! *** For MDISP = 3,4                                                           
+!                AVEFAC - real array - Averaging time adjustment factor         
+!                                      for sigma-y = (avet/3 min)**0.2          
+!                                      used for PG and MESOPUFF sigmas.         
+!              AVEFACI  - real       - 1./AVEFAC                                
+!          YZ0FAC(mxnx,mxny,mxmetdom)                                           
+!                       - real array - Roughness adjustment factor              
+!                                      for sigma-y = (z0/.03)**0.2              
+!                                      used for PG and MESOPUFF sigmas          
+!                                      (RURAL only)                             
+!          AZ0FAC(mxnx,mxny,mxmetdom)                                           
+!                       - real array - Roughness factor for A in Ax**B          
+!                                      used for PG and MESOPUFF sigma-z.        
+!                                      A' = A * AZ0FAC                          
+!                                      (RURAL only)                             
+!          BZ0TRM(mxnx,mxny,mxmetdom)                                           
+!                       - real array - Roughness TERM for B in Ax**B            
+!                                      used for PG and MESOPUFF sigma-z.        
+!                                      B' = B - BZ0TRM                          
+!                                      (RURAL only)                             
+!     Briggs urban coeffs. for each PGT class for URBAN conditions.             
+!             AYURB(6)  - real array - Urban Y coeffs. by PGT class.            
+!            XIYURB(6)  - real array - Reciprocal length scale (1/m)            
+!                                      for SIGY for each PGT class.             
+!             AZURB(6)  - real array - PGT Z coeffs. for each PGT class.        
+!            XIZURB(6)  - real array - Reciprocal length scale (1/m)            
+!                                      for SIGZ for each PGT class.             
+!                                                                               
+! *** For MDISP = 4                                                             
+!     Pasquill-Gifford-Turner(PGT) coeffs. for RURAL conditions.                
+!     Values of coeffs. and exponents from MESOPUFF II approximations.          
+!             AYPGT(6)  - real array - PGT Y coeffs. for each PGT class.        
+!             BYPGT(6)  - real array - PGT Y expons. for each PGT class.        
+!            AYPGTI(6)  - real array - Reciprocals of AYPGT(6).                 
+!            BYPGTI(6)  - real array - Reciprocals of BYPGT(6).                 
+!             AZPGT(6)  - real array - PGT Z coeffs. for each PGT class.        
+!             BZPGT(6)  - real array - PGT Z expons. for each PGT class.        
+!                                                                               
+! ---------------------------------------------------------------------         
+! --- Current configuration and meteorological information                      
+! ---------------------------------------------------------------------         
+!     IDOPTYS - integer   - Dispersion method option for SIGY **                
+!     IDOPTZS - integer   - Dispersion method option for SIGZ **                
+!                          **  computed from:                                   
+!                               1,2 = SIGMA V,W                                 
+!                                 3 = PG curves (rural), MP (urban)             
+!                                 4 = MESOPUFF II curves (rural),               
+!                                     MP (urban)                                
+!                                 5 = CTDM (neutral/stable),                    
+!                                     IDOPT(1) (other)                          
+!                               (All IDOPT - use Heffter eqns. for              
+!                                long travel times)                             
+!        IRUS - integer   - Rural cell indicator (rural=0 ; urban=1)            
+!       UAVGS - real      - Mean transport speed (m/s)                          
+!      KSTABS - integer   - PGT stability class at puff                         
+!         ELS - real      - Current Monin-Obukhov length (m)                    
+!        BVFS - real      - Current Brunt-Vaisala freq (1/s)                    
+!     MHFTSZS - integer   - Flag indicating use of Heffter growth for z         
+!                              (0: NO Heffter   1: Heffter)                     
+!      TSIGVS - real      - Current sigma-v velocity (m/s)                      
+!      TSIGWS - real      - Current sigma-w velocity (m/s)                      
+!      SYMINS - real      - Minimum value of sigma-y (m)                        
+!      SZMINS - real      - Minimum value of sigma-z (m)                        
+!  IXCELL,IYCELL,MDCELL                                                         
+!             - integer   - Current cell index (and domain)                     

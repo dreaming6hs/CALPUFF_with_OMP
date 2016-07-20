@@ -1,0 +1,50 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /SRCTAB/ -- Source-related Arrays            CALPUFF         
+!                             (Rise and Downwash Tables)                        
+!----------------------------------------------------------------------         
+! --- These are work arrays named for numerical plume rise variables            
+! --- and PRIME downwash variables for wake and cavity properties for           
+! --- point sources, but are used (where appropriate) to store                  
+! --- similar variables for other source types.                                 
+!----------------------------------------------------------------------         
+                                                                                
+      common/SRCTAB/NTR,NWK,NCV,                                               &
+     &              XTR(mxrise),ZTR(mxrise),RTR(mxrise),HTR(mxrise),           &
+     &              XWK(mxrise),SYWK(mxrise),SZWK(mxrise),DRWK(mxrise),        &
+     &              XCV(mxrise),SYCV(mxrise),SZCV(mxrise)                       
+!                                                                               
+! --- COMMON BLOCK /SRCTAB/ Variables:                                          
+!                                                                               
+!               NTR - integer  - Number of points in trajectory arrays          
+!               NWK - integer  - Number points in wake arrays                   
+!               NCV - integer  - Number points in cavity arrays                 
+!       XTR(mxrise) - real     - Downwind distance (m) for trajectory,          
+!                                Or, for buoyant line sources,                  
+!                                Distance from furthest upwind                  
+!                                part of group of line sources,                 
+!                                to points at which rise is                     
+!                                tabulated                                      
+!       ZTR(mxrise) - real     - Height above ground (m) for trajectory         
+!                                Or, for buoyant line sources,                  
+!                                Computed rise at each XTR,                     
+!                                for puff released at the point                 
+!                                farthest upwind                                
+!                 - ** note ** - Element 1 is at "XFB", the point               
+!                                in the group of line sources that              
+!                                is furthest downwind, while element            
+!                                NTR is at final rise.                          
+!       RTR(mxrise) - real     - Plume radius (m)                               
+!       HTR(mxrise) - real     - Plume rise (m) without streamline              
+!                                modifications (used for BID)                   
+!       XWK(mxrise) - real     - Downwind distance (m) from primary             
+!                                source in wake region                          
+!      SYWK(mxrise) - real     - Sigma-y (m) for primary source                 
+!      SZWK(mxrise) - real     - Sigma-z (m) for primary source                 
+!      DRWK(mxrise) - real     - Plume growth rate expressed as                 
+!                                d/dx(plume radius) for equivalent              
+!                                top-hat                                        
+!       XCV(mxrise) - real     - Downwind distance (m) from cavity              
+!                                source in wake region                          
+!      SYCV(mxrise) - real     - Sigma-y (m) for cavity source                  
+!      SZCV(mxrise) - real     - Sigma-z (m) for cavity source                  
+!                                                                               

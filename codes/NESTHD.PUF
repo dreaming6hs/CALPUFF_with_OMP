@@ -1,0 +1,81 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /NESTHD/ -- Header record information from   CALPUFF         
+!                              nested meteorological data file                  
+!                              that is read and tested, but not                 
+!                              used                                             
+!                              (Subset of /METHD/)                              
+!----------------------------------------------------------------------         
+!                                                                               
+      logical lcalgrdx                                                          
+      logical*4 llconfmx                                                        
+      character*8 levmetx                                                       
+      character*4 utmhemmx                                                      
+      character*8 datummx,pmapmx                                                
+      character*12 datenmx                                                      
+!                                                                               
+      common/NESTHD/levmetx,dversmx,nzmx,                                      &
+     & xbtzmx,xlat0mx,xlon0mx,llconfmx,rlat0mx,rlon0mx,xlat1mx,xlat2mx,        &
+     & nlux,iwat1x,iwat2x,zfacemx(mxnzp1),lcalgrdx,                            &
+     & i2dmetx,itimesx,itimeprfx,                                              &
+     & iutmznmx,feastmx,fnorthmx,pmapmx,datummx,datenmx,utmhemmx                
+!                                                                               
+! --- COMMON BLOCK /METHD/ Variables:   (without the 'x' trailer)               
+!           LEVMET - character- Level of CALMET that generated met file         
+!           DVERSM - real     - Dataset version number for CALMET file          
+!              NZM - integer  - Number of CALMET vertical levels                
+!            XBTZM - real     - Base time zone of CALMET data                   
+!           XLAT0M - real     - Reference N LATITUDE (deg) of                   
+!                               southwest corner of CALMET grid                 
+!           XLON0M - real     - Reference W LONGITUDE (deg) of                  
+!                               southwest corner of CALMET grid                 
+!          LLCONFM - logical  - Lambert Conformal Map Projection used           
+!                               instead of UTM when TRUE                        
+! RLAT0M,       - real      - N. latitude & W. longitude of x=0 and y=0         
+! RLON0M (deg)                of map projection (Used only if PMAP =            
+!                             LCC, PS, EM, TTM or LAZA)                         
+!                             NOTE: longitude POS in western hemisphere         
+! XLAT1M,       - real      - Matching N. latitude(s) for projection            
+! XLAT2M (deg)                (Used only if PMAP= LCC, PS, or EM)               
+!                             LCC :  Projection cone slices through             
+!                                    Earth's surface at XLAT1 and XLAT2         
+!                             PS  :  Projection plane slices through            
+!                                    Earth at XLAT1                             
+!                             EM  :  Projection cylinder slices through         
+!                                    Earth at [+/-] XLAT1                       
+!              NLU - integer  - Number of land use categories                   
+!     IWAT1, IWAT2 - integers - Land use categories from IWAT1 through          
+!                               IWAT2 correspond to water                       
+!   ZFACEM(mxnzp1) - real     - CALMET cell face heights (m)                    
+!                               (NZM+1 values)                                  
+!          LCALGRD - logical  - Control variable indicating if special          
+!                               meteorological fields required by               
+!                               CALGRID are stored in the met. file             
+!          I2DMET - integer   - Flag for 2 D array of sfc met                   
+!                                0: 2D arrays NOT available                     
+!                                1: 2D array available                          
+!                                                                               
+! *** Timing variables                                                          
+!           ITIMES - integer - Flag for reading times in data records           
+!                                 0: end-time (no seconds)                      
+!                                 1: begin-time / end-time with seconds         
+!         ITIMEPRF - integer - Flag for reading times in PROFILE.DAT            
+!                              data records (METFM not 4 or 5)                  
+!                                 0: end-time (no seconds)                      
+!                                 1: begin-time / end-time with seconds         
+!                                                                               
+!                                                                               
+! IUTMZNM       - integer   - UTM zone for UTM projection                       
+! FEASTM (km)   - real      - False Easting at projection origin                
+! FNORTHM(km)   - real      - False Northing at projection origin               
+! PMAPM         - character - Character code for output map projection          
+!                             UTM :  Universal Transverse Mercator              
+!                             LCC :  Lambert Conformal Conic                    
+!                             PS  :  Polar Stereographic                        
+!                             EM  :  Equatorial Mercator                        
+!                             LAZA:  Lambert Azimuthal Equal Area               
+!                             TTM :  Tangential Transverse Mercator             
+! UTMHEMM       - character - Base hemisphere for UTM projection                
+!                             (S=southern, N=northern)                          
+! DATUMM        - character - Datum-Region for grid coordinates                 
+! DATENM        - character - NIMA date for datum parameters                    
+!                             (MM-DD-YYYY  )                                    

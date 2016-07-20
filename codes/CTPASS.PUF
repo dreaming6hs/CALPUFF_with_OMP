@@ -1,0 +1,132 @@
+!-----------------------------------------------------------------------        
+! --- COMMON BLOCK /CTPASS/ --- CTSG Variables                   CALPUFF        
+!-----------------------------------------------------------------------        
+                                                                                
+      real majaxw,minaxw                                                        
+      logical ldb                                                               
+                                                                                
+      common/ctpass/nlev,ntpts,sz1,sz2,sy1,sy2,szr,syr,szmn,symn,              &
+     &              frac,twokz,twoky,xrctm(mxrect),yrctm(mxrect),              &
+     &              relief(mxhill),expo(2,mxhill),scale(2,mxhill),             &
+     &              axmax(2,mxhill),xc(mxhill),yc(mxhill),                     &
+     &              thetah(mxhill),zgrid(mxhill),hda(mxhill),                  &
+     &              ubyna(mxhill),ih,ip,ir,iregl,iregu,                        &
+     &              z(mxlev),ws(mxlev),abvf(mxlev),                            &
+     &              q,u,hd,ubyn,zlid,thetaw,                                   &
+     &              rotflo,rotang,alfw,beta,cbeta,d,                           &
+     &              h,baxi,r,                                                  &
+     &              xp,yp,xpf,ypf,zpuff,isc,                                   &
+     &              xr,yr,xrf,yrf,xre,yre,zrec,                                &
+     &              x12f,x23f,xob,xbegin,xend,xspace,                          &
+     &              t12p,t12rl,t12ru,tstep,tstart,timpg,                       &
+     &              szimpg,syimpg,szesq,szosq,szpsq,szsq,at(2,mxtpts),         &
+     &              mhillt,nzh(mxhill),zh(mxcntr,mxhill),                      &
+     &              majaxw(mxcntr,mxhill),minaxw(mxcntr,mxhill),               &
+     &              ldb,idebug                                                  
+!-----------------------------------------------------------------------        
+!     DEFINITIONS       [i]=integer     [r]=real        [a]=array               
+!-----------------------------------------------------------------------        
+!                                                                               
+! --- NOTE:  horizontal coordinates are relative to MET grid origin (m)         
+!                                                                               
+! nlev           number of levels of met data used to calc. Hd       [i]        
+! ntpts          number of points used to obtain flow factors        [i]        
+!                along trajectory of puff over hill (should be odd)             
+! sz1,sy1 (m)    puff sigmas at the start of the timestep            [r]        
+! sz2,sy2 (m)    puff sigmas at the end of the timestep              [r]        
+! szr,syr (m)    puff sigmas at the receptor                         [r]        
+! szmn,symn(m)   minimum sigma-z and sigma y allowed                 [r]        
+! frac           fraction of step from start to receptor position    [r]        
+! twokz,twoky    diffusivities over the timestep                     [r]        
+! xrctm,yrctm(m) CTSG receptor coordinates in meters                [ra]        
+! relief (m)     height of crest of hill above base elevation       [ra]        
+! expo           hill shape exponents for major and minor axes      [ra]        
+! scale (m)      horizontal length scale along major and minor axes [ra]        
+! axmax (m)      maximum axis lengths for major and minor axes      [ra]        
+! xc,yc (m)      coordinates of center of hill                      [ra]        
+! thetah (deg)   orientation of major axis of hill (CW from north)  [ra]        
+! zgrid (m)      height of "base-plane" of hill above mean sea level[ra]        
+! hda (m)        array of dividing-streamline heights               [ra]        
+!                (1 for each hill)                                              
+! ubyna (m)      array of U/N values (1 for each hill)              [ra]        
+! ih             current hill-number (receptor loop - 0 denotes      [i]        
+!                no hill)                                                       
+! ip             current puff-number (receptor loop)                 [i]        
+! ir             current receptor-number (receptor loop)             [i]        
+! iregl,iregu    region containing the receptor (l:lower; u:upper)   [i]        
+! z (m)          height of met data level (above ground)            [ra]        
+! ws (m/s)       wind speed at height z                             [ra]        
+! abvf (1/s)     Brunt-Vaisala frequency in layer whose top is at z [ra]        
+! q (g)          mass contained in current puff                      [r]        
+! u (m/s)        wind speed for current puff                         [r]        
+! hd, ubyn (m)   Hd and U/N for current hill                         [r]        
+! zlid (m)       mixing lid for current puff                         [r]        
+! thetaw (deg)   wind direction (CW from north) for current puff     [r]        
+! rotflo (rad)   angle of rotation CCW from the geographic coord.    [r]        
+!                system to the coord. system with x along the flow              
+! rotang (rad)   angle of rotation CCW from hill-ellipse coord.      [r]        
+!                system to the coord. system with x along the flow              
+! alfw (rad)     wind direction CW from the major axis of            [r]        
+!                hill-ellipse                                                   
+! beta (rad)     angle of rotation CCW from flow direction to the    [r]        
+!                normal to the hill-ellipse at the stagnation-point             
+! cbeta          COS(beta)                                           [r]        
+! d (m)          distance between puff trajectory and stagnation     [r]        
+!                streamline                                                     
+! h (m)          height of the current hill above grid elevation     [r]        
+! baxi (1/m)     inverse of the minor semiaxis of the hill-ellipse   [r]        
+! r              ratio of major axis to the minor axis of            [r]        
+!                hill-ellipse                                                   
+! xp,yp (m)      grid coordinates of current puff                    [r]        
+! xpf,ypf (m)    current puff position in flow coord. system         [r]        
+! zpuff (m)      height of current puff above grid elevation         [r]        
+! isc            stability class for current puff and timestep       [i]        
+! xr,yr (m)      grid coordinates of current receptor                [r]        
+! xrf,yrf (m)    current receptor position in flow coord. system     [r]        
+! xre,yre (m)    current receptor position in hill-ellipse coord.    [r]        
+!                system                                                         
+! zrec (m)       height of current receptor above grid elevation     [r]        
+!                (note that receptors must be on the surface)                   
+! x12f,x23f (m)  intersection of puff trajectory with boundaries     [r]        
+!                between regions 1&2, and 2&3 (flow coord. system)              
+! xob (m)        x-coord. of the stagnation point in beta coord.     [r]        
+!                system                                                         
+! xbegin,xend (m)location of beginning and ending points along       [r]        
+!                trajectory for factors contained in array "at"                 
+! xspace (m)     spacing between points contained in array "at"      [r]        
+! t12p (s)       travel time from puff position at start of period   [r]        
+!                to x12f                                                        
+! t12rl,t12ru (s) travel time from x12f to the receptor position for [r]        
+!                receptors in the lower (l) and upper (u) flows                 
+! tstep (s)      length of the time-step                             [r]        
+! tstart (s)     age of the current puff at the start of the period  [r]        
+! timpg (s)      age of the current puff at x12f                     [r]        
+! szimpg (m)     sigma-z at the impingement point                    [r]        
+! syimpg (m)     sigma-y at the impingement point                    [r]        
+! szesq (m**2)   square of the effective sigma-z of the puff at the  [r]        
+!                receptor                                                       
+! szosq (m**2)   square of the sigma-z of the puff at the x12f       [r]        
+!                (or 1 sec. after release if timpg<0)                           
+! szsq (m**2)    square of the sigma-z of the puff at the receptor   [r]        
+!                (no hill)                                                      
+! szpsq (m**2)   szsq-szosq                                          [r]        
+! at             array of deformation factors (th,tl) at points     [ra]        
+!                along the trajectory [at(1,-)=th, at(2,-)=tl]                  
+!                                                                               
+! -------------- New data used to allow CTDM hill specification --------        
+! mhillt         option to use hill information from:                [i]        
+!                   1 = CTDM preprocessor                                       
+!                   2 = original OPTHILL preprocessor                           
+! nzh            number of heights for which ellipse variables are  [ia]        
+!                provided, specified for each hill                              
+! zh  (m )       heights for which ellipse variables are provided   [ra]        
+!                (initially MSL, but referenced to grid cell elev               
+!                 in CTINIT)                                                    
+! majaxw  (m)    length of major semi-axis of elliptical contour    [ra]        
+!                for a specific value of zh                                     
+! minaxw  (m)    length of minor semi-axis of elliptical contour    [ra]        
+!                for a specific value of zh                                     
+! ----------------------------------------------------------------------        
+! ldb            debug control logical                               [l]        
+! idebug         io unit for debug writes                            [l]        
+!-----------------------------------------------------------------------        

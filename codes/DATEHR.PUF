@@ -1,0 +1,44 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /DATEHR/ -- Date/time variables              CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      integer nyrb,nmob,ndayb,njulb,nhrb,nsecb,ndathrb                          
+      integer nyre,nmoe,ndaye,njule,nhre,nsece,ndathre                          
+      integer nyrm,njulm,nhrm,nsecm,ndathrm                                     
+      integer nyrab,nmoab,ndayab,njulab,nhrab,nsecab                            
+      integer nhrind                                                            
+      real xbtz                                                                 
+      character*8 abtz                                                          
+!                                                                               
+      common/datehr/nyrb,nmob,ndayb,njulb,nhrb,nsecb,ndathrb,                  &
+     &              nyre,nmoe,ndaye,njule,nhre,nsece,ndathre,                  &
+     &              nyrm,njulm,nhrm,nsecm,ndathrm,                             &
+     &              nyrab,nmoab,ndayab,njulab,nhrab,nsecab,                    &
+     &              nhrind,xbtz,abtz                                            
+!                                                                               
+! --- COMMON BLOCK /DATEHR/ Variables:                                          
+!    NYR[B,M,E] - integer    - Four digit year                                  
+!      NMO[B,E] - integer    - Month                                            
+!     NDAY[B,E] - integer    - Day of month                                     
+!   NJUL[B,M,E] - integer    - Julian day                                       
+!    NHR[B,M,E] - integer    - Current hour (00-23)                             
+!   NSEC[B,M,E] - integer    - Current second (0-3599)                          
+! NDATHR[B,M,E] - integer    - Code date and time (YYYYJJJHH, where             
+!                              YYYY=year, JJJ=Julian day, HH=hour)              
+!----------------------------------------------------------------------         
+! --- Note:  B,E denotes date-time at the beginning or end of the step          
+!            M denotes date-time at the middle of the step                      
+!----------------------------------------------------------------------         
+!         NYRAB - integer    - Four digit year                                  
+!         NMOAB - integer    - Month                                            
+!        NDAYAB - integer    - Day of month                                     
+!        NJULAB - integer    - Julian day                                       
+!         NHRAB - integer    - Current hour (00-23)                             
+!        NSECAB - integer    - Current second (0-3599)                          
+!----------------------------------------------------------------------         
+! --- Note:  AB denotes date-time at the Beginning of an Averaging Pd           
+!----------------------------------------------------------------------         
+!        NHRIND - integer    - Hour index (01-24) for midpoint of step          
+!          XBTZ - real       - Base time zone for current date/time             
+!          ABTZ - char*8     - Base time zone for current date/time             
+!                              as string UTC+hhmm                               

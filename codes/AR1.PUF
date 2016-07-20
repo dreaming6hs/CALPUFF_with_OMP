@@ -1,0 +1,63 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /AR1/ -- Constant Area source data           CALPUFF         
+!                                                                               
+!----------------------------------------------------------------------         
+      character*16 cnamar1                                                      
+      character*40 csfar1                                                       
+!                                                                               
+      common/AR1/XAR1GRD(mxvertp1,mxarea),YAR1GRD(mxvertp1,mxarea),            &
+     & NVERT1(mxarea),HTAR1(mxarea),ELAR1(mxarea),SZ0AR1(mxarea),              &
+     & QAR1(mxspec,mxarea),NEWAR1(mxarea),NAR1,AREA1(mxarea),                  &
+     & IARU,NSAR1,                                                             &
+     & IDSFAR1(mxspec,mxarea),IXREFAR1(mxspar),                                &
+     & CNAMAR1(mxarea),CSFAR1(mxspar)                                           
+!                                                                               
+! --- COMMON BLOCK /AR1/ Variables:                                             
+!                                                                               
+! *************  Discrete area source data ***************************          
+!                                                                               
+! XAR1GRD(mxvertp1,mxarea) - real     - X coordinate of a vertex of a           
+!                                       discrete area source in grid units      
+!                                       (i.e., origin at (0.0,0.0))             
+! YAR1GRD(mxvertp1,mxarea) - real     - Y coordinate of a vertex of a           
+!                                       discrete area source in grid units      
+!                                       (i.e., origin at (0.0,0.0))             
+!           NVERT1(mxarea) - real     - Number of sides bounding area           
+!                                                                               
+! (NOTE:  The mean x,y for the polygon is computed as vertex NVERT+1)           
+!                                                                               
+!            HTAR1(mxarea) - real     - Effective release height (m)            
+!            ELAR1(mxarea) - real     - Ground elevation (m) above sea          
+!                                       level                                   
+!           SZ0AR1(mxarea) - real     - Initial sigma z (m)                     
+!                                                                               
+! (NOTE:  The initial sigma-y is computed as function of wind direction)        
+!                                                                               
+!      QAR1(mxspec,mxarea) - real     - Emission rate (g/s) for each            
+!                                       pollutant                               
+!           NEWAR1(mxarea) - integer  - Number of puffs released by each        
+!                                       source during the current step          
+!                     NAR1 - integer  - Number of discrete area sources         
+!            AREA1(mxarea) - real     - Area of each source (m^2)               
+!                     IARU - integer  - Units for emission rates in             
+!                                       control file                            
+!                                       1:   g/s/m**2                           
+!                                       2:  kg/hr/m**2                          
+!                                       3:  lb/hr/m**2                          
+!                                       4:  ton/yr/m**2                         
+!                                       5:  Odour Unit * m/s                    
+!                                       6:  Odour Unit * m/min                  
+!                                       7:  metric tons/yr                      
+!                                       8:  Bq/s  (Bq = becquerel = disintegrati
+!                                       9:  GBq/yr                              
+!                    NSAR1 - integer  - Number of source-species pairs          
+!                                       with emissions scaling factors          
+!   IDSFAR1(mxspec,mxarea) - integer  - Pointer to area-species pair            
+!                                       index, 0 to NSAR1                       
+!                                       (0 if no scaling)                       
+!         IXREFAR1(mxspar) - integer  - Cross-reference pointer from            
+!                                       area-species pairs to                   
+!                                       scale-factor tables                     
+!           CSFAR1(mxspar) - c*40 arr - List of scale-factor table names        
+!                                       for area-species pairs                  
+!          CNAMAR1(mxarea) - c*16 arr - Source names                            

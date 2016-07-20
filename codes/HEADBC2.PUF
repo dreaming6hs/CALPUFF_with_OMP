@@ -1,0 +1,132 @@
+!-----------------------------------------------------------------------        
+! --- COMMON BLOCK /HEADBC2/ --- MBCON=2 CONC.DAT Header        CALPUFF         
+!-----------------------------------------------------------------------        
+! --- After HEAD.PST from CALPOST:  Add BC to each variable name                
+! ---                               Add logicals for D and CT receptors         
+! ----------------------------------------------------------------------        
+      logical LSGRIDBC,LCOMPRSBC                                                
+      logical ldiscBC,lctsgBC                                                   
+      character*6 avtimeBC                                                      
+      character*12 amodelBC,averBC,alevBC                                       
+      character*15 asplstBC(mxspec)                                             
+      character*80 atitleBC(3)                                                  
+                                                                                
+      character*4 utmhemBC                                                      
+      character*8 datumBC,pmapBC                                                
+      character*12 datenBC                                                      
+      character*16 clat0BC,clon0BC,clat1BC,clat2BC                              
+                                                                                
+      common/headbc2/msyrBC,mjsdayBC,mshrBC,mssecBC,nsecdtBC,                  &
+     &            mnrunBC,mavgpdBC,mnperBC,mavgBC,ipverBC,irhverBC,            &
+     &            ielmetBC,jelmetBC,delxBC,delyBC,nzBC,                        &
+     &            xorigkmBC,yorigkmBC,nsstaBC,                                 &
+     &            iastarBC,iastopBC,jastarBC,jastopBC,                         &
+     &            isastrBC,isastpBC,jsastrBC,jsastpBC,                         &
+     &            ngxBC,ngyBC,ngrecBC,                                         &
+     &            meshdnBC,nptsBC,nareasBC,nlinesBC,nvolsBC,                   &
+     &            ndrecBC,nctrecBC,LSGRIDBC,ldiscBC,lctsgBC,nszoutBC,          &
+     &            xgrdBC(mxnxg,mxnyg),ygrdBC(mxnxg,mxnyg),                     &
+     &            xrecBC(mxrec),yrecBC(mxrec),zrecBC(mxrec),                   &
+     &            xctrBC(mxrect),yctrBC(mxrect),zctrBC(mxrect),                &
+     &            ihillBC(mxrect),                                             &
+     &            xkmstaBC(mxss),ykmstaBC(mxss),nearsBC(mxnxg,mxnyg),          &
+     &            lcomprsBC,i2drhBC,iutmznBC,feastBC,fnorthBC,                 &
+     &            rnlat0BC,relon0BC,xlat1BC,xlat2BC,                           &
+     &            amodelBC,averBC,alevBC,atitleBC,avtimeBC,asplstBC,           &
+     &            pmapBC,utmhemBC,datumBC,datenBC,                             &
+     &            clat0BC,clon0BC,clat1BC,clat2BC                               
+!-----------------------------------------------------------------------        
+!     DEFINITIONS       [i]=integer     [r]=real        [a]=array               
+!                       [c]=character   [L]=logical                             
+!-----------------------------------------------------------------------        
+! ldiscBC       Discrete receptors in file? (T/F)                               
+! lctsgBC       CTSG receptors in file? (T/F)                                   
+!-----------------------------------------------------------------------        
+! msyr,mjsday,  Starting time of run: yr, Julian day, hour, second   [i]        
+!   mshr,mssec                                                                  
+! nsecdt        Number of seconds in one model step                  [i]        
+! mnrun         Number of model steps in model run                   [i]        
+! mavgpd        Averaging time in model steps for results reported   [i]        
+!               by model                                                        
+! mnper         Number of averaging periods contained in model output[i]        
+! mavg          Averaging time in AVTIME units                       [i]        
+!               computed as  mavg*nsecdt/[1, 60, or 3600]seconds                
+! ipver         CALPUFF output file version flag                     [i]        
+!               0:  Current version with begin-time/end-time format             
+!               1:  Older version with end-time format                          
+! irhver        CALPUFF VISB file version flag                       [i]        
+! ielmet        Number of met. grid points (x-direction)             [i]        
+! jelmet        Number of met. grid points (y-direction)             [i]        
+! delx (km)     Grid spacing in x-direction                          [r]        
+! dely (km)     Grid spacing in y-direction                          [r]        
+! nz            Number of layers (=1 for CALPUFF)                    [i]        
+! iastar        Start of computational grid (x-direction)            [i]        
+! iastop        End of computational grid (x-direction)              [i]        
+! jastar        Start of computational grid (y-direction)            [i]        
+! jastop        End of computational grid (y-direction)              [i]        
+! isastr        Start of sampling grid (x-direction)                 [i]        
+! isastp        End of sampling grid (x-direction)                   [i]        
+! jsastr        Start of sampling grid (y-direction)                 [i]        
+! jsastp        End of sampling grid (y-direction)                   [i]        
+! ngx,ngy       Actual dimensions of gridded receptor array          [i]        
+! ngrec         Actual number of gridded receptors                   [i]        
+! meshdn        Sampling grid spacing factor                         [i]        
+! npts          Number of point sources                              [i]        
+! nareas        Number of area sources                               [i]        
+! ndrec         Number of discrete receptors                         [i]        
+! nctrec        Number of complex terrain receptors                  [i]        
+! LSGRID        Gridded receptors included? (T=yes)                  [L]        
+! nszout        Number of chemical species/level combinations        [i]        
+! xgrd (km)     X-coordinate gridded receptors                      [ra]        
+! ygrd (km)     Y-coordinate gridded receptors                      [ra]        
+! xrec (km)     X-coordinate discrete receptors                     [ra]        
+! yrec (km)     Y-coordinate discrete receptors                     [ra]        
+! zrec (m)      Height of discrete receptors above sea level        [ra]        
+! xctr (km)     X-coordinate discrete receptors (complex terrain)   [ra]        
+! yctr (km)     Y-coordinate discrete receptors (complex terrain)   [ra]        
+! zctr (m)      Height of complex terrain receptors above sea level [ra]        
+! ihill         Hill identification number for complex terrain      [ia]        
+!               receptors                                                       
+! lcomprs       Logical indicating whether data on disk are          [L]        
+!               compressed                                                      
+! i2drh         Flag for 2D array of relative humidity               [i]        
+! amodel        Name of the model used to produce concentrations     [c]        
+! aver          Version number of model                              [c]        
+! alev          Level of revision of model                           [c]        
+! atitle        Title for run                                       [ca]        
+! avtime        Averaging time units (second, minute, or hour)       [c]        
+! asplst        List of species/level names                         [ca]        
+!-----------------------------------------------------------------------        
+! IUTMZN        - integer   - UTM zone for UTM projection                       
+! FEAST  (km)   - real      - False Easting at projection origin                
+! FNORTH (km)   - real      - False Northing at projection origin               
+! RNLAT0,       - real      - N. latitude & E. longitude of x=0 and y=0         
+! RELON0 (deg)                of map projection (Used only if PMAP =            
+!                             LCC, PS, EM, TTM or LAZA)                         
+!                             NOTE: longitude neg in western hemisphere         
+! XLAT1,        - real      - Matching N. latitude(s) for projection            
+! XLAT2 (deg)                 (Used only if PMAP= LCC, PS, or EM)               
+!                             LCC :  Projection cone slices through             
+!                                    Earth's surface at XLAT1 and XLAT2         
+!                             PS  :  Projection plane slices through            
+!                                    Earth at XLAT1                             
+!                             EM  :  Projection cylinder slices through         
+!                                    Earth at [+/-] XLAT1                       
+!-----------------------------------------------------------------------        
+! PMAP          - character - Character code for output map projection          
+!                             UTM :  Universal Transverse Mercator              
+!                             LCC :  Lambert Conformal Conic                    
+!                             PS  :  Polar Stereographic                        
+!                             EM  :  Equatorial Mercator                        
+!                             LAZA:  Lambert Azimuthal Equal Area               
+!                             TTM :  Tangential Transverse Mercator             
+! UTMHEM        - character - Base hemisphere for UTM projection                
+!                             (S=southern, N=northern)                          
+! DATUM         - character - Datum-Region for grid coordinates                 
+! DATEN         - character - NIMA date for datum parameters                    
+!                             (MM-DD-YYYY  )                                    
+! CLAT0         - character - Character version of RNLAT0                       
+! CLON0         - character - Character version of RELON0                       
+! CLAT1         - character - Character version of XLAT1                        
+! CLAT2         - character - Character version of XLAT2                        
+!-----------------------------------------------------------------------        

@@ -1,0 +1,149 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /COMPARM/ -- Computational variables         CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      real wscat(5),tkcat(11),plx0(6),ptg0(2),ppc(6)                            
+      real svmin(6,2),swmin(6,2),cdiv(2),tibldist(3)                            
+      real sysplith(mxmetdom), shsplith(mxmetdom), cnsplith(mxspec)             
+      real fclip                                                                
+      integer iresplit(24),iqnum(5),iqnext                                      
+      logical lage                                                              
+      common/COMPARM/xmxlen,mxnew,xsamlen,mxsam,ncount,sl2pf,cdiv,             &
+     &               wscalm,wscat,tkcat,                                       &
+     &               svmin,swmin,symin,szmin,szcap_m,xminzi,xmaxzi,            &
+     &               plx0,ptg0,ppc,tbd,tibldist,nlutibl,                       &
+     &               nsplit,iresplit,zisplit,roldmax,nsplith,cnsplith,         &   ! !!modified by wangzhm
+     &               sysplithgrd,shsplithgrd,sysplith,shsplith,                &
+     &               epsslug,epsarea,dsrise,trajincl,                          &
+     &               mxagehr,tsecmax,lage,fclip                                 
+!                                                                               
+! --- COMMON BLOCK /COMPARM/ Variables:                                         
+!           XMXLEN - real    - Maximum length of a newly-released slug/         
+!                              puff (in grid cells).  Used to determine         
+!                              the puff release rate.                           
+!            MXNEW - integer - Maximum number of puffs that can be              
+!                              released from a single source during one         
+!                              time step.                                       
+!          XSAMLEN - real    - Maximum travel distance of a puff/slug           
+!                              (in grid cells) during one sampling step         
+!            MXSAM - integer - Maximum number of sampling steps per             
+!                              time step                                        
+!           NCOUNT - integer - Number of iterations used in RISEWIND to         
+!                              obtain mean wind for sampling step that          
+!                              includes gradual rise                            
+!            SL2PF - real    - Ratio of minimum slug sigma-y to slug            
+!                              length at which transition from slug             
+!                              sampling to puff sampling takes place            
+!          CDIV(2) - real    - Threshold criterion for adjusting for            
+!                              significant vertical divergence (horiz.          
+!                              convergence) across puff (1/s)                   
+!                              Partial adjustment begins at CDIV(1),            
+!                              and reaches full strength at CDIV(2)             
+!           WSCALM - real    - Wind speed threshold between "calm" and          
+!                              non-"calm" conditions.  Also used as             
+!                              lower limit on wind speed returned from          
+!                              power-law extrapolation (m/s)                    
+!         WSCAT(5) - real    - Upper value (m/s) for first 5 wind speed         
+!                              classes (class 6 has no upper limit)             
+!        TKCAT(11) - real    - Upper value (K) for first 11 temperature         
+!                              classes (class 12 has no upper limit)            
+!       SVMIN(6,2) - real    - Minimum Turbulence Sigma-v (m/s) for             
+!                              stability classes 1-6 over land (1-6,1)          
+!                              and over water (1-6,2)                           
+!       SWMIN(6,2) - real    - Minimum Turbulence Sigma-w (m/s) for             
+!                              stability classes 1-6 over land (1-6,1)          
+!                              and over water (1-6,2)                           
+!            SYMIN - real    - Minimum Sigma y (m) applied to newly-            
+!                              released puffs                                   
+!            SZMIN - real    - Minimum Sigma z (m) applied to newly-            
+!                              released puffs                                   
+!          SZCAP_M - real    - Maximum Sigma z (m) allowed to avoid             
+!                              floating-point trap when virtuals are            
+!                              computed                                         
+!           XMINZI - real    - Minimum mixing height (m)                        
+!           XMAXZI - real    - Maxmimum mixing height (m)                       
+!          PLX0(6) - real    - Wind profile power law exponents used as         
+!                              defaults (read from control file, or             
+!                              filled with ISC values for either rural          
+!                              or urban land use).  Power law is used           
+!                              to extrapolate winds in the vertical only        
+!                              when "single-point" met. data are used           
+!                              (ISCMET.DAT or PLMMET.DAT)                       
+!          PTG0(2) - real    - Potential temperature gradient default           
+!                              values obtained from control file for            
+!                              stability classes E and F (degK/m)               
+!           PPC(6) - real    - Plume path coefficient values from               
+!                              file for use with partial plume height           
+!                              height correction option, MCTADJ = 3             
+!              TBD - real    - Variable determining switch-over pt. from        
+!                              Schulman-Scire scheme to Huber-Snyder            
+!                              scheme (SS used for Hs < Hb + TBD * HL,          
+!                              TBD < 0   ==> always use Huber-Synder            
+!                              TBD = 1.5 ==> always use Schulman-Scire          
+!                              TBD = 0.5 ==> ISC switch-point                   
+!      TIBLDIST(3) - real    - Sub-grid TIBL distance (km) parameters:          
+!                              Pure TIBL growth from coast to dist.(1)          
+!                              Transition to CALMET Zi from (1) to (2)          
+!                              Search dist. for locating nearest coast          
+!          NLUTIBL - integer - Search radius (cells) for locating the           
+!                              nearest land and water cells                     
+!            FCLIP - real    - Number of Sigma-y (m) upwind at the              
+!                              start of a step or downwind at the end           
+!                              of a step that receptor-specific puff or         
+!                              slug properties are extrapolated                 
+!----------------------------------------------------------------------         
+! -----   Puff Splitting Information  -----                                     
+!----------------------------------------------------------------------         
+! ---   Vertical  ---                                                           
+!            NSPLIT - integer - Number of puffs/slugs that result               
+!                               (puff is sectioned NSPLIT-1 times)              
+!      IRESPLIT(24) - integer - Reset flag for puff-splitting (hourly)          
+!                               0: Do not change current ISPLIT values          
+!                               1: Reset all ISPLIT values to 1                 
+!           ZISPLIT - real    - Split allowed if "ziold" mixing height          
+!                               exceeds ZISPLIT (m)                             
+!           ROLDMAX - real    - Split allowed if ratio "ziold/zimax"            
+!                               is not greater than ROLDMAX                     
+! ---   Horizontal  ---                                                         
+!           NSPLITH - integer - Number of puffs that result                     
+!  CNSPLITH(mxspec) - real    - Minimum average concentration (g/m^3)           
+!                               of each species in puff before                  
+!                               it may be split                                 
+!       SYSPLITHGRD - real    - Minimum sigma-y (grid cells) of a puff          
+!                               before it may be split                          
+!       SHSPLITHGRD - real    - Minimum puff elongation rate                    
+!                               (SYSPLITHGRD grid cells / hour) due to          
+!                               wind shear before puff may be split.            
+!                               This is the radial wind speed                   
+!                               difference between the puff center and          
+!                               a point located 1.2 SYSPLITH away               
+!                               (currently set as fd/2 in SPLIT).               
+! SYSPLITH(mxmetdom)- real    - SYSPLITHGRD converted to meters, for            
+!                               each met grid domain                            
+! SHSPLITH(mxmetdom)- real    - SHSPLITHGRD converted to m/s, for               
+!                               each met grid domain                            
+!----------------------------------------------------------------------         
+! -----   Integral Convergence Information  -----                               
+!----------------------------------------------------------------------         
+!           EPSSLUG - real    - Fractional convergence criterion for            
+!                               numerical SLUG sampling integral                
+!           EPSAREA - real    - Fractional convergence criterion for            
+!                               numerical AREA-source integral                  
+!            DSRISE - real    - Along-trajectory distance step used             
+!                               when marching in numerical plume rise           
+!                               solver                                          
+!----------------------------------------------------------------------         
+! -----   PRIME Downwash Information  -----                                     
+!----------------------------------------------------------------------         
+!          TRAJINCL - real    - Trajectory inclination angle (deg),             
+!                               ignoring streamline descent, at which           
+!                               check is made for wake influence                
+!----------------------------------------------------------------------         
+! -----   Puff Age Limit Information  -----                                     
+!----------------------------------------------------------------------         
+!          MXAGEHR - integer  - Maximum puff age allowed in run (hours)         
+!          TSECMAX - real     - Maximum puff age allowed in run (sec)           
+!             LAGE - logical  - Control flag for applying the puff age          
+!                               limit                                           
+!                               F: if MXAGEHR <= 0                              
+!                               T: if MXAGEHR >  0                              

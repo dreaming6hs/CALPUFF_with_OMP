@@ -1,0 +1,13 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /WETDAT/ -- Wet deposition data              CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/WETDAT/wa(2,mxspec)                                                
+!                                                                               
+! --- COMMON BLOCK /WETDAT/ Variables:                                          
+!                                                                               
+!         WA(2,mxspec) - real   - Array of scavenging coefficients              
+!                                 (1/sec) for each pollutant and                
+!                                 precipitation type                            
+!                                 (1,-) = liquid precipitation                  
+!                                 (2,-) = frozen precipitation                  

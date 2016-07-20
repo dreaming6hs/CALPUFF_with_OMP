@@ -1,0 +1,214 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /CHEMDAT/ -- Chemistry data                  CALPUFF         
+!                                                                               
+!----------------------------------------------------------------------         
+!                                                                               
+      character*16 cidoz                                                        
+      character*4 utmhemoz,xyunitoz                                             
+      character*8 datumoz,pmapoz                                                
+      character*12 datenoz                                                      
+!                                                                               
+      character*16 cidhp                                                        
+      character*4 utmhemhp,xyunithp                                             
+      character*8 datumhp,pmaphp                                                
+      character*12 datenhp                                                      
+                                                                                
+                                                                                
+      common/CHEMDAT/MOZ,BCKO3,BCKO3M(12),MNH3,MAVGNH3,BCKNH3,                 &
+     & BCKNH3M(12),BCKNH3Z(mxnz),BCKNH3ZM(12,mxnz),RNITE1,RNITE2,              &
+     & RNITE3,RSHET,MH2O2,BCKH2O2,BCKH2O2M(12),BCKPMF(12),                     &
+     & OFRAC(12),VCNX(12),CHEMT(24,3),NDECAY,DKYIELD(mxspec,mxspec),           &
+     & DKRATE(mxspec),NOZSTA,IBDATHRO,IBSECO,IEDATHRO,IESECO,T2BTZOZ,          &
+     & IUTMOZ,XOZM(mxoz),YOZM(mxoz),OZCONC(mxoz),                              &
+     & NEAROZ(mxnx,mxny,mxmetdom),FEASTOZ,FNORTHOZ,RNLAT0OZ,RELON0OZ,          &
+     & RNLAT1OZ,RNLAT2OZ,NH2O2STA,IBDATHRH,IBSECH,IEDATHRH,IESECH,             &
+     & T2BTZHP,IUTMHP,XH2O2M(mxaq),YH2O2M(mxaq),H2O2CONC(mxaq),                &
+     & NEARH2O2(mxnx,mxny,mxmetdom),                                           &
+     & FEASTHP,FNORTHHP,RNLAT0HP,RELON0HP,RNLAT1HP,RNLAT2HP,                   &
+     & CIDOZ(mxoz),pmapoz,utmhemoz,datumoz,datenoz,xyunitoz,                   &
+     & CIDHP(mxaq),pmaphp,utmhemhp,datumhp,datenhp,xyunithp                    &
+     & ,RH_ISRP,SO4_ISRP                                                        
+!                                                                               
+! --- COMMON BLOCK /CHEMDAT/ Variables:                                         
+!                                                                               
+!             MOZ - integer - Ozone data input flag                             
+!                               0 = use a monthly background O3 value           
+!                               1 = read hourly O3 data                         
+!           BCKO3 - real    - Current background ozone conc (ppb)               
+!      BCKO3M(12) - real    - Monthly background ozone concs (ppb)              
+!            MNH3 - integer - Ammonia data input flag                           
+!                               0 = use 1 monthly background NH3 for            
+!                                   all layers                                  
+!                               1 = read monthly background NH3 for             
+!                                   each layer from the NH3Z.DAT file           
+!         MAVGNH3 - integer - Ammonia vertical averaging option                 
+!                               0 = use NH3 at puff center height               
+!                                   (no averaging is done)                      
+!                               1 = average NH3 values over vertical            
+!                                   extent of puff                              
+!          BCKNH3 - real    - Current background ammonia conc (ppb)             
+!     BCKNH3M(12) - real    - Monthly background ammonia concs (ppb)            
+!     BCKNH3Z(NZ) - real    - Current background ammonia profile (ppb)          
+! BCKNH3ZM(12,NZ) - real    - Monthly background ammonia profile (ppb)          
+!          RNITE1 - real    - Nighttime SO2 loss rate (percent/hr)              
+!          RNITE2 - real    - Nighttime NOx loss rate (percent/hr)              
+!          RNITE3 - real    - Nighttime HNO3 formation rate (percent/hr)        
+!           RSHET - real    - Heterogeneous SO2 loss rate (fraction/hr)         
+!           MH2O2 - integer - H2O2 data input flag                              
+!                               0 = use constant background H2O2 value          
+!                               1 = read hourly H2O2 data                       
+!         BCKH2O2 - real    - Current background H2O2 conc (ppb)                
+!    BCKH2O2M(12) - real    - Monthly background H2O2 concs (ppb)               
+!     CHEMT(24,3) - real    - User-specified chemical transformation            
+!                             rates (percent/hr)                                
+!                             (-,1) -- (k1)  SO2 --> SO4                        
+!                             (-,2) -- (k2)  NOx --> All products               
+!                             (-,3) -- (k3)  NOx --> HNO3                       
+!                                                                               
+! --- ISORROPIA (MCHEM=6,7) input constraints                                   
+!         RH_ISRP - real    - Minimum relative humidity in %                    
+!        SO4_ISRP - real    - Minimum SO4 concentration in g/m^3                
+!                                                                               
+! --- SOA (MCHEM=4) monthly background data                                     
+!      BCKPMF(12) - real    - Fine particulate concentration in ug/m^3          
+!       OFRAC(12) - real    - Organic fraction of fine particulates             
+!        VCNX(12) - real    - VOC / NOX ratio (after reaction)                  
+!                                                                               
+! --- Decay option (MCHEM=5) data                                               
+!          NDECAY - integer - Number of species provided decay rates            
+!  DKRATE(mxspec) - real    - User-specified mass decay rate expressed          
+!                             as a reciprocal Half-Life (1/sec) [1/Tau_half]    
+! DKYIELD(mxspec,mxspec) - real - User-specified Yield Factors for              
+!                             each child species that gains mass as a           
+!                             parent species decays; the array order is         
+!                             (child_ID,parent_ID)                              
+!                             All yield factors are positive or 0.0             
+!                                                                               
+! --- Data from OZONE.DAT data file                                             
+! ----------------------------------                                            
+!          NOZSTA - integer - Number of ozone stations in the OZONE.DAT         
+!                             file                                              
+!        IBDATHRO - integer - Date/hour at beginning of period for              
+!                             the first data record in the file                 
+!                             (YYYYJJJHH, where YYYY=year,                      
+!                             JJJ=Julian day, HH=hour [00-23 LST])              
+!          IBSECO - integer - Seconds of the first data record in the           
+!                             file  (0000-3599)                                 
+!        IEDATHRO - integer - Date/hour at end of period for                    
+!                             the last data record in the file                  
+!                             (YYYYJJJHH, where YYYY=year,                      
+!                             JJJ=Julian day, HH=hour [00-23 LST])              
+!          IESECO - integer - Seconds of the last data record in the            
+!                             file  (0000-3599)                                 
+!     CIDOZ(mxoz) - C*16    - Station identifier                                
+!      XOZM(mxoz) - real    - X coordinate (m) of the ozone station             
+!                             relative to the origin of the met. grid           
+!      YOZM(mxoz) - real    - Y coordinate (m) of the ozone station             
+!                             relative to the origin of the met. grid           
+!    OZCONC(mxoz) - real    - Ozone concentration (ppb) at each station         
+!                                                                               
+! --- Computed from data in OZONE.DAT ---                                       
+!                                                                               
+!   NEAROZ(mxnx,mxny,mxmetdom)                                                  
+!                 - integer - Station number of closest ozone station           
+!                             to each point in each MET grid domain             
+!                             each grid point                                   
+!                                                                               
+! --- MAP Projection Variables ---                                              
+!                                                                               
+!          PMAPOZ - char    - Character code for input map projection           
+!                             LL  :  Latitude/longitude                         
+!                             UTM :  Universal Transverse Mercator              
+!                             LCC :  Lambert Conformal Conic                    
+!                             PS  :  Polar Stereographic                        
+!                             EM  :  Equatorial Mercator                        
+!                             LAZA:  Lambert Azimuthal Equal Area               
+!                             TTM :  Tangential Transverse Mercator             
+!        UTMHEMOZ - char    - Base hemisphere for UTM projection                
+!                              (S=southern, N=northern)                         
+!         DATUMOZ - char    - Datum-Region for grid coordinates                 
+!         DATENOZ - char    - NIMA date for datum parameters                    
+!                                 (MM-DD-YYYY  )                                
+!        XYUNITOZ - char    - Units for coordinates (e.g., KM)                  
+!          IUTMOZ - integer - UTM zone for UTM projection                       
+!        UTMHEMOZ - char    - Base hemisphere for UTM projection                
+!                              (S=southern, N=northern)                         
+!        FEASTOZ  - real    - False Easting (km) at projection origin           
+!        FNORTHOZ - real    - False Northing (km) at projection origin          
+!       RNLAT0OZ, - real    - N. latitude & E. longitude of x=0 and y=0         
+!        RELON0OZ (deg)       of map projection (Used only if PMAP =            
+!                                LCC, PS, EM, TTM or LAZA)                      
+!                                NOTE: longitude neg in western hemisphere      
+!       RNLAT1OZ, - real   - Matching N. latitude(s) for projection             
+!       RNLAT2OZ (deg)       (Used only if PMAP3= LCC, PS, or EM)               
+!                            LCC :  Projection cone slices through              
+!                                   Earth's surface at XLAT1 and XLAT2          
+!                            PS  :  Projection plane slices through             
+!                                   Earth at XLAT1                              
+!                            EM  :  Projection cylinder slices through          
+!                                   Earth at [+/-] XLAT1                        
+!                                                                               
+! --- Data from H2O2.DAT data file                                              
+! ----------------------------------                                            
+!        NH2O2STA - integer - Number of H2O2 stations in the H2O2.DAT           
+!                             file                                              
+!          IUTMHP - integer - UTM zone in which the H2O2 station                
+!                             coordinates are specified                         
+!        IBDATHRH - integer - Date/hour at beginning of period for              
+!                             the first data record in the file                 
+!                             (YYYYJJJHH, where YYYY=year,                      
+!                             JJJ=Julian day, HH=hour [00-23 LST])              
+!          IBSECH - integer - Seconds of the first data record in the           
+!                             file  (0000-3599)                                 
+!        IEDATHRH - integer - Date/hour at end of period for                    
+!                             the last data record in the file                  
+!                             (YYYYJJJHH, where YYYY=year,                      
+!                             JJJ=Julian day, HH=hour [00-23 LST])              
+!          IESECH - integer - Seconds of the last data record in the            
+!                             file  (0000-3599)                                 
+!     CIDHP(mxaq) - C*16    - Station identifier                                
+!    XH2O2M(mxaq) - real    - X coordinate (m) of the H2O2 station              
+!                             relative to the origin of the met. grid           
+!    YH2O2M(mxaq) - real    - Y coordinate (m) of the H2O2 station              
+!                             relative to the origin of the met. grid           
+!  H2O2CONC(mxaq) - real    - H2O2 concentration (ppb) at each station          
+!                                                                               
+! --- Computed from data in H2O2.DAT ---                                        
+!                                                                               
+!   NEARH2O2(mxnx,mxny,mxmetdom)                                                
+!                 - integer - Station number of closest H2O2 station            
+!                             to each point in each MET grid domain             
+!                                                                               
+! --- MAP Projection Variables ---                                              
+!                                                                               
+!          PMAPHP - char    - Character code for input map projection           
+!                             LL  :  Latitude/longitude                         
+!                             UTM :  Universal Transverse Mercator              
+!                             LCC :  Lambert Conformal Conic                    
+!                             PS  :  Polar Stereographic                        
+!                             EM  :  Equatorial Mercator                        
+!                             LAZA:  Lambert Azimuthal Equal Area               
+!                             TTM :  Tangential Transverse Mercator             
+!        UTMHEMHP - char    - Base hemisphere for UTM projection                
+!                              (S=southern, N=northern)                         
+!         DATUMHP - char    - Datum-Region for grid coordinates                 
+!         DATENHP - char    - NIMA date for datum parameters                    
+!                                 (MM-DD-YYYY  )                                
+!        XYUNITHP - char    - Units for coordinates (e.g., KM)                  
+!          IUTMHP - integer - UTM zone for UTM projection                       
+!        UTMHEMHP - char    - Base hemisphere for UTM projection                
+!                              (S=southern, N=northern)                         
+!        FEASTHP  - real    - False Easting (km) at projection origin           
+!        FNORTHHP - real    - False Northing (km) at projection origin          
+!       RNLAT0HP, - real    - N. latitude & E. longitude of x=0 and y=0         
+!        RELON0HP (deg)       of map projection (Used only if PMAP =            
+!                             LCC, PS, EM, TTM or LAZA)                         
+!                             NOTE: longitude neg in western hemisphere         
+!       RNLAT1HP, - real    - Matching N. latitude(s) for projection            
+!       RNLAT2HP (deg)        (Used only if PMAP3= LCC, PS, or EM)              
+!                             LCC :  Projection cone slices through             
+!                                    Earth's surface at XLAT1 and XLAT2         
+!                             PS  :  Projection plane slices through            
+!                                    Earth at XLAT1                             
+!                             EM  :  Projection cylinder slices through         
+!                                    Earth at [+/-] XLAT1                       

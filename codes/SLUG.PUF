@@ -1,0 +1,28 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /SLUG/ -- Slug parameters                    CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/slug/xpe(mxpuff),ype(mxpuff),zpe(mxpuff),sigye(mxpuff),           &
+     & sigze(mxpuff),xtote(mxpuff),tmtote(mxpuff),speed0(mxpuff)                
+!                                                                               
+! --- COMMON BLOCK /SLUG/ Variables:                                            
+!    XPE(mxpuff) - real    - Met. grid X coordinate of                          
+!                            oldest end of slug                                 
+!    YPE(mxpuff) - real    - Met. grid Y coordinate of                          
+!                            oldest end of slug                                 
+!    ZPE(mxpuff) - real    - Height above ground (m) of                         
+!                            oldest end of slug after rise                      
+!                            (i.e., stack height + plume rise)                  
+!  SIGYE(mxpuff) - real    - Sigma y (m) for the                                
+!                            oldest end of slug without BID                     
+!  SIGZE(mxpuff) - real    - Sigma z (m) for the                                
+!                            oldest end of slug without BID                     
+!  XTOTE(mxpuff) - real    - Total integrated travel distance (m) of            
+!                            the oldest end of slug                             
+! TMTOTE(mxpuff) - real    - Total integrated travel time (s) of                
+!                            the oldest end of slug                             
+!----------------------------------------------------------------------         
+! -----   Data associated with slug at the time of release  -----               
+!----------------------------------------------------------------------         
+! SPEED0(mxpuff) - real    - Transport (elongation) speed of fresh              
+!                            slug (m/s)                                         

@@ -1,0 +1,29 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /DRYPART/ -- Particle dry dep. parameters    CALPUFF         
+!----------------------------------------------------------------------         
+!                                                                               
+      common/DRYPART/nspart,gdiam(mxpdep),gsig(mxpdep),rho(mxpdep),            &
+     & npsint,dconst4,pdiam(mxint,mxpdep),sc23(mxint,mxpdep),                  &
+     & vgrav(mxint,mxpdep),tstop(mxint,mxpdep),fract(mxint,mxpdep),            &
+     & vairms                                                                   
+!                                                                               
+! --- COMMON BLOCK /DRYPART/ Variables:                                         
+!                  NSPART - real    - Number of particle species                
+!           GDIAM(mxpdep) - real    - Geometric mass mean diameter              
+!                                     (microns)                                 
+!            GSIG(mxpdep) - real    - Geometric standard deviation of           
+!                                     particle distribution (microns)           
+!             RHO(mxpdep) - real    - Particle density (g/cm**3)                
+!                  NPSINT - integer - Number of size intervals used to          
+!                                     evaluate the effective particle           
+!                                     deposition velocity                       
+!                 DCONST4 - real    - Empirical constant in particle            
+!                                     deposition layer resistance eqn.          
+!     PDIAM(mxint,mxpdep) - real    - Geometric mean diameter (microns)         
+!                                     of each interval                          
+!      SC23(mxint,mxpdep) - real    - Schmidt number ** DCONST4                 
+!     VGRAV(mxint,mxpdep) - real    - Gravitational settling velocity           
+!                                     (m/s)                                     
+!     TSTOP(mxint,mxpdep) - real    - Stopping time (s)                         
+!     FRACT(mxint,mxpdep) - real    - Mass fraction in each size interval       
+!                  VAIRMS - real    - Viscosity of air (m**2/s)                 

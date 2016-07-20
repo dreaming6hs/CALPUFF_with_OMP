@@ -1,0 +1,100 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /METHR/ -- Hourly meteorological fields      CALPUFF         
+!                             from the meteorological data                      
+!                             file(s)                                           
+!----------------------------------------------------------------------         
+! **********************************************************************        
+! --- Exponent, Inc. Updates:                                                   
+! **********************************************************************        
+! --- Add computed 3D pressure fields (may be external in future)               
+! **********************************************************************        
+!                                                                               
+      common/METHR/umet(mxnx,mxny,mxnz,mxmetdom),                              &
+     & vmet(mxnx,mxny,mxnz,mxmetdom),tmet(mxnx,mxny,mxnz,mxmetdom),            &
+     & ipgt(mxnx,mxny,mxmetdom),htmix(mxnx,mxny,mxmetdom),                     &
+     & ustar(mxnx,mxny,mxmetdom),xmonin(mxnx,mxny,mxmetdom),                   &
+     & wstar(mxnx,mxny,mxmetdom),rmm(mxnx,mxny,mxmetdom),                      &
+     & tempss(mxss,mxmetdom),rhoss(mxss,mxmetdom),                             &
+     & qswss(mxss,mxmetdom),ccss(mxss,mxmetdom),czenss(mxss,mxmetdom),         &
+     & irhss(mxss,mxmetdom),ipcode(mxss,mxmetdom),ptg(2),plexp,dptinvo,        &
+     & wsprf(mxprfz),wdprf(mxprfz),tprf(mxprfz),svprf(mxprfz),                 &
+     & swprf(mxprfz),ssprf(mxprfz),zprf(mxprfz),nzprf,                         &
+     & wdiv(mxnx,mxny,mxnz,mxmetdom),                                          & 
+! frr (09/01) - 2D fields for CALMET version >= V5.3 Lev 010901                &
+     & temp2d(mxnx,mxny,mxmetdom),rho2d(mxnx,mxny,mxmetdom),                   &
+     & qsw2d(mxnx,mxny,mxmetdom),cc2d(mxnx,mxny,mxmetdom),                     &
+     & czen2d(mxnx,mxny,mxmetdom),irh2d(mxnx,mxny,mxmetdom),                   &
+     & ipcode2d(mxnx,mxny,mxmetdom),                                           & 
+                                                                                
+!     - Computed fields                                                        &
+      pmet(mxnx,mxny,mxnzp1,mxmetdom)                                          
+! **********************************************************************        
+                                                                                
+!                                                                               
+! --- COMMON BLOCK /METHR/ Variables:                                           
+!                                                                               
+!      UMET(mxnx,mxny,mxnz,mxmetdom)                                            
+!                        - real    - U-component of the wind (m/s) at           
+!                                    each grid point                            
+!      VMET(mxnx,mxny,mxnz,mxmetdom)                                            
+!                        - real    - V-component of the wind (m/s)              
+!      TMET(mxnx,mxny,mxnz,mxmetdom)                                            
+!                        - real    - 3-D temperature field (deg. K)             
+!      PMET(mxnx,mxny,mxnzp1,mxmetdom)                                          
+!                        - real    - 3-D pressure field (atm)                   
+!           IPGT(mxnx,mxny,mxmetdom)                                            
+!                        - integer - PGT stability class (1-6)                  
+!          HTMIX(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Mixing height (m)                          
+!          USTAR(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Friction velocity (m/s)                    
+!         XMONIN(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Monin-Obukhov length (m)                   
+!          WSTAR(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Convective velocity scale (m/s)            
+!            RMM(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Precipitation rate (mm/hr)                 
+!  TEMPSS(mxss,mxmetdom) - real    - Temperature (deg. K) at each               
+!                                    surface met. station                       
+!   RHOSS(mxss,mxmetdom) - real    - Air density (kg/m**3)                      
+!   QSWSS(mxss,mxmetdom) - real    - Short-wave solar radiation (W/m**2)        
+!    CCSS(mxss,mxmetdom) - real    - Cloud cover (tenths)                       
+!  CZENSS(mxss,mxmetdom) - real    - Cosine of solar zenith angle               
+!   IRHSS(mxss,mxmetdom) - integer - Relative humidity (%)                      
+!  IPCODE(mxss,mxmetdom) - integer - Precipitation code at each surface         
+!                                    met. station                               
+!                 PTG(2) - real    - Default potential temperature grad.        
+!                                     for stability 5,6 (deg. K/m)              
+!                  PLEXP - real    - Power law exponent for wind profile        
+!                DPTINVO - real    - Strength of inversion above CBL            
+!                                    (jump in potential temperature K)          
+!          WSPRF(mxprfz) - real    - Vector avg. wind speed (m/s) from          
+!                                    PROFILE.DAT                                
+!          WDPRF(mxprfz) - real    - Vector wind direction (deg) from           
+!                                    PROFILE.DAT                                
+!           TPRF(mxprfz) - real    - Temperature (K) from PROFILE.DAT           
+!          SVPRF(mxprfz) - real    - Sigma-v (m/s) from PROFILE.DAT             
+!          SWPRF(mxprfz) - real    - Sigma-w (m/s) from PROFILE.DAT             
+!          SSPRF(mxprfz) - real    - Scalar avg. wind speed (m/s) from          
+!                                    PROFILE.DAT                                
+!           ZPRF(mxprfz) - real    - Heights at which PROFILE.DAT data          
+!                                    are provided (m)                           
+!                  NZPRF - integer - Number of heights in PROFILE.DAT           
+!      WDIV(mxnx,mxny,mxnz,mxmetdom)                                            
+!                        - real    - Vertical divergence dw/dz (1/s)            
+!                                                                               
+! frr (09/01) - additional fields needed for CALMET V5.3 level 010901 and up    
+!         TEMP2D(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Surface Temperature (deg. K)               
+!          RHO2D(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Air density (kg/m**3)                      
+!          QSW2D(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Short-wave solar radiation (W/m**2)        
+!           CC2D(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Cloud cover (tenths)                       
+!         CZEN2D(mxnx,mxny,mxmetdom)                                            
+!                        - real    - Cosine of solar zenith angle               
+!          IRH2D(mxnx,mxny,mxmetdom)                                            
+!                        - integer - Relative humidity (%)                      
+!       IPCODE2D(mxnx,mxny,mxmetdom)                                            
+!                        - integer - Precipitation code                         

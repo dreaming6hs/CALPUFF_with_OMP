@@ -1,0 +1,53 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /VOL1/ -- Volume source data for discrete    CALPUFF         
+!                            sources with constant emissions                    
+!----------------------------------------------------------------------         
+      character*16 CNAMVL1                                                      
+      character*40 csfvl1                                                       
+!                                                                               
+      common/VOL1/XVL1GRD(mxvol),YVL1GRD(mxvol),HTVL1(mxvol),                  &
+     & ELVL1(mxvol),SY0VL1(mxvol),SZ0VL1(mxvol),QVL1(mxspec,mxvol),            &
+     & NEWVL1(mxvol),NVL1,IVLU,NSVL1,                                          &
+     & IDSFVL1(mxspec,mxvol),IXREFVL1(mxspvl),                                 &
+     & CNAMVL1(mxvol),CSFVL1(mxspvl)                                            
+!                                                                               
+! --- COMMON BLOCK /VOL1/ Variables:                                            
+!                                                                               
+!         XVL1GRD(mxvol) - real     - X coordinate of a volume                  
+!                                     source in grid units                      
+!                                     (i.e., origin at (0.0,0.0))               
+!         YVL1GRD(mxvol) - real     - Y coordinate of a volume                  
+!                                     source in grid units                      
+!                                     (i.e., origin at (0.0,0.0))               
+!           HTVL1(mxvol) - real     - Effective release height (m)              
+!           ELVL1(mxvol) - real     - Ground elevation (m) above sea            
+!                                     level                                     
+!          SY0VL1(mxvol) - real     - Initial sigma y (m)                       
+!          SZ0VL1(mxvol) - real     - Initial sigma z (m)                       
+!     QVL1(mxspec,mxvol) - real     - Emission rate (g/s) for each              
+!                                     pollutant                                 
+!                   NVL1 - integer  - Number of volume sources                  
+!          NEWVL1(mxvol) - integer  - Number of puffs released by each          
+!                                     source during the current step            
+!                   IVLU - integer  - Units for emission rates in               
+!                                     control file                              
+!                                     1:   g/s                                  
+!                                     2:  kg/hr                                 
+!                                     3:  lb/hr                                 
+!                                     4:  ton/yr                                
+!                                     5:  Odour Unit * m**3/s                   
+!                                     6:  Odour Unit * m**3/min                 
+!                                     7:  metric tons/yr                        
+!                                     8:  Bq/s  (Bq = becquerel = disintegration
+!                                     9:  GBq/yr                                
+!                  NSVL1 - integer  - Number of source-species pairs            
+!                                     with emissions scaling factors            
+!  IDSFVL1(mxspec,mxvol) - integer  - Pointer to volume-species pair            
+!                                     index, 0 to NSVL1                         
+!                                     (0 if no scaling)                         
+!       IXREFVL1(mxspvl) - integer  - Cross-reference pointer from              
+!                                     volume-species pairs to                   
+!                                     scale-factor tables                       
+!         CSFVL1(mxspvl) - c*40 arr - List of scale-factor table names          
+!                                     for volume-species pairs                  
+!         CNAMVL1(mxvol) - c*16 arr - Source names                              

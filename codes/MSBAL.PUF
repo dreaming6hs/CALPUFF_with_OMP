@@ -1,0 +1,32 @@
+!----------------------------------------------------------------------         
+! --- COMMON BLOCK /MSBAL/ -- arrays for Mass Balance Output     CALPUFF        
+!----------------------------------------------------------------------         
+!                                                                               
+      logical lbc                                                               
+      common/MSBAL/balinp(mxspec),balout(mxspec),baltrn(mxspec),               &
+     &             balwet(mxspec),baldry(mxspec),baltot(mxspec,2),             &
+     &             balinpbc(mxspec),baloutbc(mxspec),baltrnbc(mxspec),         &
+     &             balwetbc(mxspec),baldrybc(mxspec),baltotbc(mxspec,2),       &
+     &             lbc                                                          
+!                                                                               
+! --- COMMON BLOCK /MSBAL/ Variables:                                           
+!                                                                               
+!       BALINP(mxspec) - real    - Mass of each species emitted                 
+!                                  during current hour (g)                      
+!       BALOUT(mxspec) - real    - Mass of each species advected                
+!                                  during current hour (g)                      
+!       BALTRN(mxspec) - real    - Mass of each species transformed             
+!                                  during current hour ( +/- g)                 
+!       BALWET(mxspec) - real    - Mass of each species removed (wet            
+!                                  depletion) during current hour (g)           
+!       BALDRY(mxspec) - real    - Mass of each species removed (dry            
+!                                  depletion) during current hour (g)           
+!     BALTOT(mxspec,2) - real    - Mass of each species in domain at            
+!                                  end of current hour (g) below(1)             
+!                                  and above(2) surface mixed layer             
+!                                                                               
+! --- Above array names are repeated with 'BC' appended to store the            
+! --- corresponding information for mass that enters domain through             
+! --- the boundary conditions                                                   
+!                                                                               
+!                  LBC - logical - Boundary condition mass reported?            
