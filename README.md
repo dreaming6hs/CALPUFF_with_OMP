@@ -11,10 +11,12 @@ Declarations of variables involved in the functions or subroutines invoked in th
 All modifications by me were marked with *wangzhm* in the code files.
 
 Then the codes were compiled with *Intel Visual Fortran(IVF)* with *OMP* on.
-The recompiling command and the options related can be found in *CPL_CALPUFF.BAT* and *cpl_unix.bat*.
+The recompiling command and the options related can be found in `CPL_CALPUFF.BAT` and `cpl_unix.bat`.
 
 For more details, please contact me via E-mail: *dreaming@ixy.info*
 
 **Welcome aboard CALPUFFers!**
 
+
+# License
 This repository uses the *Apache License 2.0*.
