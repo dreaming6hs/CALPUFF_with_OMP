@@ -4,7 +4,7 @@
 # Brief description
 Base on CALPUFF v7.2, codes were transformed from fixed format(.for) to free format(.f90).
 
-Parallel calculating tasks are held among PUFF(s), thus PARALLEL region was created at *puff loop* in *subroutine comp* in the file **_calpuff.f90_**.
+Parallel calculating tasks are held among PUFF(s), thus PARALLEL region was created at *puff loop* in *subroutine comp* in the file `calpuff.f90`.
 
 Declarations of variables involved in the functions or subroutines invoked in the PARALLEL region, and those in *subroutine comp* were added, so that some OMP attributes, eg. THREADPRIVATE, FISRTPRIVATE, etc., can be defined.
 
